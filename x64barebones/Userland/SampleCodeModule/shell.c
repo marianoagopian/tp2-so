@@ -25,14 +25,17 @@ typedef struct programInfo {
 
 static programInfo programs[] = {
   {.name = "clear", .ptrToFunction = (uint64_t) &sys_clear_screen, .args = 0, .pipe = 0},
-  {.name = "changeFontSize", .ptrToFunction = (uint64_t) &changeFontSize, .args = 1, .pipe = 0},
-  {.name = "divByZero", .ptrToFunction = (uint64_t) &divByZero, .args = 0, .pipe = 0},
+  {.name = "changefontsize", .ptrToFunction = (uint64_t) &changeFontSize, .args = 1, .pipe = 0},
+  {.name = "divbyzero", .ptrToFunction = (uint64_t) &divByZero, .args = 0, .pipe = 0},
   {.name = "help", .ptrToFunction = (uint64_t) &help, .args = 0, .pipe = 0},
   {.name = "inforeg", .ptrToFunction = (uint64_t) &infoReg, .args = 0, .pipe = 0},
   {.name = "invalidopcode", .ptrToFunction = (uint64_t) &invalidOperationCode, .args = 0, .pipe = 0},
   {.name = "printmem", .ptrToFunction = (uint64_t) &printmem, .args = 1, .pipe = 0},
   {.name = "time", .ptrToFunction = (uint64_t) &time, .args = 0, .pipe = 0},
-  {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0}
+  {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0},
+  {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
+  {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},
+  {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 0, .pipe = 0}
 };
 
 

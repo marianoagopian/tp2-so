@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <color.h>
+#include "data_types.h"
 
 #define STDIN 0
 #define STDOUT 1

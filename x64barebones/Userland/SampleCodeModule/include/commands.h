@@ -29,4 +29,14 @@ void time();
 
 void tron();
 
+//tests
+
+void test_mm();
+
+void test_prio();
+
+void test_processes();
+
+
+
 #endif
