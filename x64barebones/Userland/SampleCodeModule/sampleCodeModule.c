@@ -12,8 +12,8 @@ static char * newLine = "$>:";
 
 int main() {
 	clearScreen();	
-
-	print("Welcome to Shell! Type \"HELP\" for a list of commands.\n\n", 55);
+	shell();
+	/*
 	while(1) {
 		print(newLine, strlen(newLine));
 		char readBuffer[BUFFER_LENGTH] = {0};
@@ -25,5 +25,5 @@ int main() {
 		checkCommand(command, parameter, readBuffer);
 
 		callFunction(command, parameter);
-	}
+	}*/
 }

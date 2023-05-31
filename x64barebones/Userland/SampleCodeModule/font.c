@@ -25,7 +25,7 @@ int strToNum(char *str){
   return (result * sign);
 }
 
-void changefontsize(char *par){
+void changeFontSize(char *par){
   if(*par == 0) {
     print(noArgument, strlen(noArgument));
     return;
