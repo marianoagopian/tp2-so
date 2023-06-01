@@ -5,6 +5,11 @@
     "color.h": "c",
     "commands.h": "c",
     "interrupts.h": "c",
-    "multitasking.h": "c"
+    "multitasking.h": "c",
+    "data_types.h": "c",
+    "cstring": "c",
+    "memorymanager.h": "c",
+    "cstdio": "c",
+    "stdio.h": "c"
   }
 }

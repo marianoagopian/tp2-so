@@ -17,6 +17,8 @@ int strlen(const char * str);
 
 int strcmp(const char * str1, const char* str2);
 
+int strncpy(char * dest, const char * src, unsigned int n);
+
 void infoReg();
 
 void printf(char *fmt,...);

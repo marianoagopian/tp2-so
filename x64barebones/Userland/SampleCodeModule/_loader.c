@@ -60,33 +60,33 @@ int _start() {
 	//Limpiamos BSS
 	memset(&bss, 0, &endOfBinary - &bss);
 
-	printf(escudoBetis);
+	// printf(escudoBetis);
 
-	printf("Loading Real Betis Balompie SO...\n");
+	// printf("Loading Real Betis Balompie SO...\n");
 
-  sys_beep(392);
-  sys_holder(6);
-  sys_beep(440);
-  sys_holder(4);
-  sys_beep(494);
-  sys_holder(6);
-  sys_beep(440);
-  sys_holder(4);
-  sys_beep(494);
-  sys_holder(6);
-  sys_beep(440);
-  sys_holder(4);
-  sys_beep(494);
-  sys_holder(6);
-  sys_beep(440);
-  sys_holder(4);
-  sys_beep(494);
-  sys_holder(5);
-  sys_beep(587);
-  sys_holder(5);
-  sys_beep(440);
-  sys_holder(6);
-  sys_stop();
+  // sys_beep(392);
+  // sys_holder(6);
+  // sys_beep(440);
+  // sys_holder(4);
+  // sys_beep(494);
+  // sys_holder(6);
+  // sys_beep(440);
+  // sys_holder(4);
+  // sys_beep(494);
+  // sys_holder(6);
+  // sys_beep(440);
+  // sys_holder(4);
+  // sys_beep(494);
+  // sys_holder(6);
+  // sys_beep(440);
+  // sys_holder(4);
+  // sys_beep(494);
+  // sys_holder(5);
+  // sys_beep(587);
+  // sys_holder(5);
+  // sys_beep(440);
+  // sys_holder(6);
+  // sys_stop();
 
 	return main();
 

@@ -5,7 +5,7 @@
 #include <color.h>
 #include "data_types.h"
 
-#define STDIN 0
+#define STDIN 1
 #define STDOUT 1
 #define STDERR 2
 
@@ -43,10 +43,10 @@ uint64_t sys_pipe_info(pipes_info * info);
 uint64_t sys_process_alive(unsigned int pid);
 uint64_t sys_process_info(process_info * info);
 uint64_t sys_read_pipe(unsigned int pipe_id, char * dest, unsigned int count);
-uint64_t sys_register_child_process(uint64_t entryPoint, uint8_t input, uint8_t output, char ** arg0);
+uint64_t sys_register_child_process(uint64_t entryPoint, uint8_t input, uint8_t output, uint64_t arg0);
 uint64_t sys_nice(uint8_t pid, int delta);
 uint64_t sys_register_pipe_available();
-uint64_t sys_register_process(uint64_t entrypoint, uint8_t input, uint8_t output, char ** arg0);
+uint64_t sys_register_process(uint64_t entrypoint, uint8_t input, uint8_t output, uint64_t arg0);
 uint64_t sys_register_sem(unsigned int sem_id, unsigned int value);
 uint64_t sys_register_sem_available(unsigned int value);
 uint64_t sys_renounce_cpu();

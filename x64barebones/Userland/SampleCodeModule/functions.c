@@ -76,6 +76,15 @@ int strlen(const char * str) {
     return ans;
 }
 
+int strncpy(char * dest, const char * src, unsigned int n){
+    int i=0;
+    for(; src[i]!=0 && i<n; i++){
+        dest[i] = src[i];
+    }
+    dest[i] = 0;
+    return i;
+}
+
 int strcmp(const char* s1, const char* s2) {
     while(*s1 && (*s1 == *s2)) {
         s1++;

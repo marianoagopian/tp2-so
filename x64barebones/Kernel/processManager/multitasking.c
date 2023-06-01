@@ -1,6 +1,8 @@
 // This is a personal academic project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "../include/multitasking.h"
+#include <syscalls.h>
+#include <stdio.h>
 
 // ---- Constantes ----
 #define TOTAL_TASKS 20
@@ -115,8 +117,6 @@ int findTask(unsigned int pid){
 }
 
 
-
-
 /* --- Creation and destruction --- */
 
 uint64_t build_stack(uint64_t entrypoint, char ** arg0, uint64_t stackEnd){
@@ -154,12 +154,18 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 		return ERROR_NO_SPACE_FOR_TASK;
 	}
 
+	sysWrite(1, "add task inicio\n", _strlen("add task inicio\n"));
 	currentDimTasks++;
 
 	int pos;
-	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++);	// find a free space
+	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++) {
+		int num = get_current_pid();
+		printf("%d\n", num);
+	};	// find a free space
 
-	uint8_t * stackEnd = mm_malloc(STACK_SIZE);
+	sysWrite(1, "pre malloc\n", _strlen("pre malloc\n"));
+	uint8_t * stackEnd = (uint8_t *)mm_malloc(STACK_SIZE);
+	sysWrite(1, "malloc\n", _strlen("malloc\n"));
 
 	if(stackEnd == NULL)
 		return ERROR_NO_SPACE_FOR_TASK;
@@ -184,6 +190,12 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 	tasks[pos].input = input;
 	tasks[pos].output = output;
 
+	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++) {
+		int num = get_current_pid();
+		printf("%d\n", num);
+	};
+
+	sysWrite(1, "add task fin\n", _strlen("add task fin\n"));
 	return tasks[pos].pid;
 }
 

@@ -7,7 +7,10 @@
 #include <shell.h>
 
 int main() {
-	clearScreen();	
+	sys_holder(5);
+
+	clearScreen();
+
 	shell();
 	/*
 	while(1) {

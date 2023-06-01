@@ -13,6 +13,7 @@
 #define NEW_LINE "$>:"
 #define PIPE "|"
 #define MAX_COMMAND_WORDS 10
+#define MIN(a,b) ((a) <= (b) ? (a) : (b))
 
 typedef struct programInfo {
   char * name;
@@ -21,7 +22,7 @@ typedef struct programInfo {
   uint8_t pipe;
 } programInfo;
 
-#define PROGRAMS_QTY 5
+#define PROGRAMS_QTY 12
 
 static programInfo programs[] = {
   {.name = "clear", .ptrToFunction = (uint64_t) &sys_clear_screen, .args = 0, .pipe = 0},
@@ -41,7 +42,6 @@ static programInfo programs[] = {
 
 int parseCommand(char ** command, char readBuf[BUFFER_LENGTH]) {
 	int i = 0, commandWords = 0;
-  //hola josesito pepe 
 	
 	for(int postSpace = 1; commandWords < MAX_COMMAND_WORDS && readBuf[i] != '\n' && readBuf[i] != 0; i++) {
     if(readBuf[i] == ' ') {
@@ -57,6 +57,122 @@ int parseCommand(char ** command, char readBuf[BUFFER_LENGTH]) {
   return commandWords;
 }
 
+unsigned int check_valid_program(char * string){
+    for(int i = 0; i < PROGRAMS_QTY; i++){
+        if(strcmp(string, programs[i].name)==0){
+            return i;
+        }
+    }
+    return -1;
+}
+
+char ** make_params(char ** words, unsigned int len){
+    void * coso = (void*) sys_alloc((2 + len) * sizeof(char *)); // + 1 for name, + 1 por null termination
+
+    if(coso == NULL){
+        printf(MALLOC_ERROR);     //TODO: replace
+        return NULL;
+    }
+
+    char ** params = (char **) coso;
+
+    void * param;
+    int paramLen;
+
+    int i=0;
+    for(; i<len + 1; i++){
+        paramLen = strlen(words[i]) + 1;
+        param = (void*) sys_alloc(paramLen);
+
+         if(param == NULL){
+            printf(MALLOC_ERROR);     //TODO: replace
+            return NULL;
+        }
+
+        char * param2 = (char *) param;
+
+        strncpy(param2, words[i], paramLen);
+        params[i] = param2;
+    }
+    params[i] = NULL;
+    return params;
+}
+
+int piped_process_handle(char ** words, unsigned int amount_of_words){
+    if(amount_of_words != 3 || strcmp(PIPE, words[1]) != 0)
+        return 0;
+    unsigned int p1 = check_valid_program(words[0]);
+    unsigned int p2 = check_valid_program(words[2]);
+    if(p1 == -1 || p2 == -1){
+        printf(INVALID_COMMAND_MSG);
+        return 1;
+    }
+    if(!programs[p1].pipe){
+        printf(PIPE_ERROR);
+        return 1;
+    }
+    int pipe_id = sys_register_pipe_available();
+
+    if(pipe_id <= 0){
+        printf("Error creating pipe!");
+        return 1;
+    }
+
+    sys_register_child_process(programs[p1].ptrToFunction, STDIN, pipe_id, (uint64_t) make_params(words, 0)); 
+    sys_register_child_process(programs[p2].ptrToFunction, pipe_id, FOREGROUND, (uint64_t) make_params(words, 0)); 
+
+    sys_wait_for_children();
+
+    sys_destroy_pipe(pipe_id);
+
+    return 2;
+}
+
+void single_process_handle(char ** words, unsigned int amount_of_words){
+    printf("LLEGO HASTA ACA");
+     unsigned int program_pos = check_valid_program(words[0]);
+    printf("HASTA ACA TAMBIEN");
+
+    if(program_pos == -1){
+        printf(INVALID_COMMAND_MSG);
+        return;
+    }
+    if(amount_of_words - 1 < programs[program_pos].args){
+        printf(MISSING_ARGS);
+        return;
+    }
+
+
+    printf("aca lo tiene que llamar a jorge\n");
+    // Check if user wants to run program in background
+    int i, backgroud_indiaction = 0;
+    for(i=programs[program_pos].args + 1; !backgroud_indiaction && i<amount_of_words; i++){
+        if(strcmp("//", words[i]) == 0){         // We consider the symbol as the last argument. All subsequent arguments will be ignored
+            backgroud_indiaction = 2;       
+        }
+        else if(strcmp("/", words[i]) == 0){         // We consider the symbol as the last argument. All subsequent arguments will be ignored
+            backgroud_indiaction = 1;       
+        }
+    }
+
+    // Run in background
+    if(backgroud_indiaction == 2){
+        sys_register_process(programs[program_pos].ptrToFunction, STDIN, BACKGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); 
+    }
+    else if(backgroud_indiaction == 1){
+        sys_register_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); 
+    }
+
+    // Run on screen
+    else{
+        printf("Run on screen\n");
+        sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND, (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
+    
+        sys_wait_for_children();
+    }
+    
+}
+
 void shell() {
   print("Welcome to Shell! Type \"HELP\" for a list of commands.\n\n", 55);
   char * command[MAX_COMMAND_WORDS] = {0};
@@ -66,8 +182,11 @@ void shell() {
     char readBuffer[BUFFER_LENGTH] = {0};
     scanf(readBuffer, BUFFER_LENGTH);
 
-    parseCommand(command, readBuffer);
+    int commandWords = parseCommand(command, readBuffer);
 
-    // callFunction(command, parameter);
+    if(piped_process_handle(command,commandWords) == 0){
+      single_process_handle(command,commandWords);
+    }
+
   }
 }
