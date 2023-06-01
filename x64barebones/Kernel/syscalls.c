@@ -10,7 +10,7 @@
 #include "../include/multitasking.h"
 #include "../include/memoryManager.h"
 #include "../include/pipes.h"
-#include "../include/sempahore.h"
+#include "../include/semaphore.h"
 
 #define MAX_MEM_READ 16
 #define BYTE_LENGTH 2

@@ -3,10 +3,11 @@
 
 #include <video.h>
 #include <time.h>
+#include "./data_types.h"
 
 #define REGISTERS 15
 
-int sysWrite(int fd, char * buf, int count);
+uint64_t sysWrite(unsigned int fd, const char * buf, unsigned int count);
 
 void sysClear();
 

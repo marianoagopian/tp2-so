@@ -150,9 +150,10 @@ uint64_t build_stack(uint64_t entrypoint, char ** arg0, uint64_t stackEnd){
 }
 
 int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priority, uint8_t immortal, char ** arg0){
-	if(currentDimTasks>=TOTAL_TASKS){
+	if(currentDimTasks >= TOTAL_TASKS) {
 		return ERROR_NO_SPACE_FOR_TASK;
 	}
+
 	currentDimTasks++;
 
 	int pos;
@@ -167,7 +168,7 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 
 	// --- Datos de task ---
 	tasks[pos].stackPointer = (uint64_t) stackStart - STACK_POINT_OF_ENTRY;	// stack start
-	tasks[pos].stackSegment = SS_VALUE;							// is constant
+	tasks[pos].stackSegment = SS_VALUE;	// is constant
 
 	tasks[pos].pid = newPidValue++;
 	tasks[pos].state = ACTIVE_PROCESS;
@@ -188,10 +189,10 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 
 // params are null terminated array of pointers to strings
 void free_params(char ** params){
-	if(params==NULL)
+	if(params == NULL)
 		return;
 
-	for(int i=0; params[i]!=NULL; i++){
+	for(int i = 0; params[i] != NULL; i++){
 		mm_free(params[i]);
 	}
 	mm_free(params);
@@ -217,7 +218,7 @@ void removeCurrentTask(){
 	// If the process is being piped, we signal that pipe will no longer
 	// be use by process. 
 	uint8_t out = tasks[currentTask].output;
-	if(out != STDOUT && out != STDOUT_LEFT && out != STDOUT_RIGHT){
+	if(out != STDOUT){
 		signal_eof(out);
 	}
 
@@ -256,7 +257,7 @@ void alter_process_state(unsigned int pid, uint8_t new_state){
 // void pauseScreenProcess(unsigned int screen){
 // 	for(int i=0; i<TOTAL_TASKS; i++){
 // 		if(tasks[i].state != WAITING_FOR_CHILD && tasks[i].state != DEAD_PROCESS && tasks[i].output == screen){
-// 			tasks[i].state = tasks[i].state==PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
+// 			tasks[i].state = tasks[i].state == PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
 // 		}
 // 	}
 // }
@@ -301,7 +302,7 @@ void alter_process_state(unsigned int pid, uint8_t new_state){
 // 	return TASK_ALTERED;
 // }
 
-int removeTask(unsigned int pid){
+int removeTask(unsigned int pid) {
 	int pos = findTask(pid);
 	if(pos < 0)					// se quiere remover task que no existe
 		return NO_TASK_FOUND;
@@ -318,7 +319,7 @@ int removeTask(unsigned int pid){
 	return TASK_ALTERED;
 }
 
-unsigned int change_priority(unsigned int pid, int delta){
+unsigned int change_priority(unsigned int pid, int delta) {
 	int pos = findTask(pid);
 	if(pos < 0)
 		return NO_TASK_FOUND;

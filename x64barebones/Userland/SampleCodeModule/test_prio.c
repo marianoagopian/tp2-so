@@ -21,7 +21,7 @@ void test_prio() {
   uint64_t i;
 
   for (i = 0; i < TOTAL_PROCESSES; i++)
-    pids[i] = sys_register_process("endless_loop_print", 0, argv); //mirar pasaje de argumentos 
+    pids[i] = sys_register_process((uint64_t) &endless_loop_print, 1, 1, argv);
 
   bussy_wait(WAIT);
   printf("\nCHANGING PRIORITIES...\n");
@@ -43,7 +43,7 @@ void test_prio() {
   printf("UNBLOCKING...\n");
 
   for (i = 0; i < TOTAL_PROCESSES; i++)
-    sys_pause_process(pids[i]);  //esta bien esto?????
+    sys_pause_process(pids[i]);
 
   bussy_wait(WAIT);
   printf("\nKILLING...\n");
