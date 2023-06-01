@@ -1,9 +1,7 @@
 #include "./include/syscalls.h"
 #include "./include/test_util.h"
 #include "./include/commands.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "./include/functions.h"
 
 #define MAX_BLOCKS 128
 
@@ -29,12 +27,12 @@ uint64_t test_mm(uint64_t argc, char *argv[]) {
     rq = 0;
     total = 0;
 
-    puts("test_mm: Allocating memory...\n");
+    printf("test_mm: Allocating memory...\n");
 
     // Request as many blocks as we can
     while (rq < MAX_BLOCKS && total < max_memory) {
       mm_rqs[rq].size = GetUniform(max_memory - total - 1) + 1;
-      mm_rqs[rq].address = malloc(mm_rqs[rq].size);
+      mm_rqs[rq].address = (void *)sys_alloc(mm_rqs[rq].size);
 
       if (mm_rqs[rq].address) {
         total += mm_rqs[rq].size;
@@ -59,8 +57,8 @@ uint64_t test_mm(uint64_t argc, char *argv[]) {
     // Free
     for (i = 0; i < rq; i++)
       if (mm_rqs[i].address)
-        free(mm_rqs[i].address);
+        sys_free(mm_rqs[i].address);
 
-    puts("test_mm OK\n");
+    printf("test_mm OK\n");
   }
 }

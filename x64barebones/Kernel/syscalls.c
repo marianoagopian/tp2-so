@@ -126,7 +126,7 @@ uint64_t sysAlloc(uint64_t len) {
 	return (uint64_t) mm_malloc(len);
 }
 
-uint64_t sysNais(uint8_t pid, int delta){
+uint64_t sysNice(uint8_t pid, int delta){
 	return change_priority(pid, delta);
 }
 
@@ -220,7 +220,7 @@ uint64_t sysWaitSem(unsigned int sem_id){
 	return wait_sem(sem_id);
 }
 
-uint64_t sysWrite(int fd, const char * buf, int count) {
+uint64_t sysWrite(unsigned int fd, const char * buf,unsigned int count) {
   if(fd != STDERR && fd != STDOUT) {
     return 0;
   }

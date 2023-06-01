@@ -4,11 +4,7 @@
 #include <syscalls.h>
 #include <functions.h>
 #include <commands.h>
-
-#define BUFFER_LENGTH 32
-
-static char * newLine = "$>:";
-
+#include <shell.h>
 
 int main() {
 	clearScreen();	
@@ -26,4 +22,5 @@ int main() {
 
 		callFunction(command, parameter);
 	}*/
+  return 1;
 }

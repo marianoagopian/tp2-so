@@ -6,11 +6,10 @@
 #include <stdint.h>
 #include <lib.h>
 #include <stdbool.h>
+#include "./data_types.h"
 
 #define INVALID_PIPE_ID -1
 #define EOF -1
-
-
 
 uint64_t get_pipe_info(pipes_info * info);
 

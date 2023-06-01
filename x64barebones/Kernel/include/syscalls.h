@@ -65,7 +65,7 @@ uint64_t sysReadPipe(unsigned int pipe_id, char * dest, unsigned int count);
 
 uint64_t sysRegisterChildProcess(uint64_t entryPoint, uint8_t input, uint8_t output, char ** arg0);
 
-uint64_t sysNais(uint8_t pid, int delta);
+uint64_t sysNice(uint8_t pid, int delta);
 
 uint64_t sysRegisterPipeAvailable();
 

@@ -1,6 +1,7 @@
 #include <stdint.h>
-#include <defs.h>
-#include <syscalls.h>
+#include "../include/defs.h"
+#include "../include/syscalls.h"
+#include "../include/lib.h"
 
 
 /* printRegisters */

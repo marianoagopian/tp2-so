@@ -27,7 +27,7 @@ void test_prio() {
   printf("\nCHANGING PRIORITIES...\n");
 
   for (i = 0; i < TOTAL_PROCESSES; i++)
-    sys_nais(pids[i], prio[i]);
+    sys_nice(pids[i], prio[i]);
 
   bussy_wait(WAIT);
   printf("\nBLOCKING...\n");
@@ -38,7 +38,7 @@ void test_prio() {
   printf("CHANGING PRIORITIES WHILE BLOCKED...\n");
 
   for (i = 0; i < TOTAL_PROCESSES; i++)
-    sys_nais(pids[i], MEDIUM);
+    sys_nice(pids[i], MEDIUM);
 
   printf("UNBLOCKING...\n");
 

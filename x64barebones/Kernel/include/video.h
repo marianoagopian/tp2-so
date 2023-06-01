@@ -10,6 +10,8 @@
 
 #define MAX_LEVEL 3
 
+#define BACKGROUND 0
+
 typedef struct {
 	uint8_t b;
 	uint8_t g;

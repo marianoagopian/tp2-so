@@ -254,53 +254,53 @@ void alter_process_state(unsigned int pid, uint8_t new_state){
 	tasks[pos].state = new_state;
 }
 
-// void pauseScreenProcess(unsigned int screen){
-// 	for(int i=0; i<TOTAL_TASKS; i++){
-// 		if(tasks[i].state != WAITING_FOR_CHILD && tasks[i].state != DEAD_PROCESS && tasks[i].output == screen){
-// 			tasks[i].state = tasks[i].state == PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
-// 		}
-// 	}
-// }
+void pauseScreenProcess(unsigned int screen){
+	for(int i=0; i<TOTAL_TASKS; i++){
+		if(tasks[i].state != WAITING_FOR_CHILD && tasks[i].state != DEAD_PROCESS && tasks[i].output == screen){
+			tasks[i].state = tasks[i].state == PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
+		}
+	}
+}
 
-// void kill_screen_processes(){
-// 	uint8_t currentTaskKilled = false;
-// 	for(int i=0; i< TOTAL_TASKS; i++){
-// 		if(tasks[i].state != DEAD_PROCESS &&  tasks[i].immortal != IMMORTAL ){		//TODO: que vuelva a ser solo los screen processes
-// 			destroy_process(i);
+void kill_screen_processes(){
+	uint8_t currentTaskKilled = false;
+	for(int i=0; i< TOTAL_TASKS; i++){
+		if(tasks[i].state != DEAD_PROCESS &&  tasks[i].immortal != IMMORTAL ){
+			destroy_process(i);
 
-// 			if(i == currentTask){
-// 				currentTaskKilled = true;
-// 			}
-// 		}
-// 	}
+			if(i == currentTask){
+				currentTaskKilled = true;
+			}
+		}
+	}
 
-// 	// If the current process is killed, we do not want
-// 	// to return to executing it, so we force the next
-// 	// task.
+	// If the current process is killed, we do not want
+	// to return to executing it, so we force the next
+	// task.
 
-// 	if(currentTaskKilled){
-// 		forceChangeTask();
-// 	}
-// }
+	if(currentTaskKilled){
+		forceChangeTask();
+	}
+}
 
-// // pauso o despauso proceso con el pid
-// int pauseOrUnpauseProcess(unsigned int pid){
-// 	int pos = findTask(pid);
-// 	if(pos < 0)					// se quiere pausar task que no existe
-// 		return NO_TASK_FOUND;
+// pauso o despauso proceso con el pid
+int pauseOrUnpauseProcess(unsigned int pid){
+	int pos = findTask(pid);
+	if(pos < 0)					// se quiere pausar task que no existe
+		return NO_TASK_FOUND;
 
-// 	if(tasks[pos].immortal)
-// 		return TASK_NOT_ALTERED;
+	if(tasks[pos].immortal)
+		return TASK_NOT_ALTERED;
 
-// 	tasks[pos].state = tasks[pos].state==PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
+	tasks[pos].state = tasks[pos].state==PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
 
 
-// 	if(pos == currentTask){
-// 		forceChangeTask();
-// 	}
+	if(pos == currentTask){
+		forceChangeTask();
+	}
 
-// 	return TASK_ALTERED;
-// }
+	return TASK_ALTERED;
+}
 
 int removeTask(unsigned int pid) {
 	int pos = findTask(pid);

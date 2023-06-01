@@ -27,4 +27,6 @@ int intToString(int num, char *buffer);
 
 void screenSize(int *width, int *height);
 
+void * memset(void * destiation, int32_t c, uint64_t length);
+
 #endif

@@ -19,7 +19,7 @@ GLOBAL sys_free
 GLOBAL sys_get_pid
 GLOBAL sys_kill_process
 GLOBAL sys_mm_status
-GLOBAL sys_nais
+GLOBAL sys_nice
 GLOBAL sys_pause_process
 GLOBAL sys_pipe_info
 GLOBAL sys_process_alive
@@ -144,7 +144,7 @@ sys_mm_status:
  int 80h
  ret
 
-sys_nais:
+sys_nice:
  mov rax, 21
  int 80h
  ret

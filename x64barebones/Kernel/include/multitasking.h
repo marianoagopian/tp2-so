@@ -22,6 +22,9 @@
 #define ERROR_NO_SPACE_FOR_TASK -1
 #define ERROR_SCREEN_NOT_AVAILABLE 2
 
+#define STDIN 1
+#define STDOUT 1
+
 // Common constantes
 #define DEFAULT_PRIORITY 1
 #define IMMORTAL 1

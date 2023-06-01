@@ -1,6 +1,8 @@
 #ifndef _COMMANDS_H_
 #define _COMMANDS_H_
 
+#include <stdint.h>
+
 #define COMMANDS_QTY 9
 #define PARAMETER_LENGTH 10
 #define BUFFER_LENGTH 256
@@ -31,11 +33,11 @@ void tron();
 
 //tests
 
-void test_mm();
+uint64_t test_mm(uint64_t argc, char *argv[]);
 
 void test_prio();
 
-void test_processes();
+int64_t test_processes(int64_t argc, char *argv[]);
 
 
 

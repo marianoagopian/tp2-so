@@ -1,6 +1,6 @@
 // This is a personal academic project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
-#include <semaphore.h>
+#include "../include/semaphore.h"
 
 #define MAX_SEMAPHORES 50
 #define MAX_WAITING_PROCESS 20
