@@ -10,7 +10,4 @@
 #Object files
 *.o
 
-#Bash script
-*.sh
-
 .bash_history
