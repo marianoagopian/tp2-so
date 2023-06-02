@@ -66,6 +66,9 @@ EXTERN sysWaitSem
 EXTERN sysWritePipe
 EXTERN sysWriteToScreen
 
+EXTERN has_or_decrease_time
+EXTERN next_task
+
 SECTION .text
 
 %macro pushState 0
@@ -162,9 +165,36 @@ picSlaveMask:
   retn
 
 
+enable_multitasking:
+  mov BYTE [multitasking_enabled], 1
+  jmp tickHandle
+
 ;8254 Timer (Timer Tick)
 _irq00Handler:
-	irqHandlerMaster 0
+	;irqHandlerMaster 0
+  pushState
+  cmp BYTE [multitasking_enabled], 1
+  jne enable_multitasking
+
+  call has_or_decrease_time
+  cmp rax, 1
+  je tickHandle
+
+  switchTask:
+    mov rdi, rsp
+    mov rsi, ss
+    call next_task
+    mov rsp,rax
+
+  tickHandle:
+    mov rdi, 0
+    call irqDispatcher
+
+  mov al, 20h
+  out 20h, al
+
+  popState
+  iretq
 
 ;Keyboard
 _irq01Handler:
@@ -489,3 +519,6 @@ SECTION .bss
 	aux resq 1
 	reg resb 64
 	regdump	resq 17
+
+SECTION .data
+  multitasking_enabled db 0

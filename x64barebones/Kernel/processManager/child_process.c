@@ -57,7 +57,6 @@ void remove_children(unsigned int fatherPid){
 }
 
 void add_child(unsigned int fatherPid, unsigned int childPid){
-	sysWrite(1, "add child\n", _strlen("add child\n"));
 	for(int i=0 ; i<MAX_WAIT_TASKS; i++){
 		if(wait_table[i].state == NOT_TRACKING){
 
@@ -96,8 +95,6 @@ void wait_for_children(){
 
 unsigned int add_child_task(uint64_t entrypoint, uint8_t input, uint8_t output, char ** arg0){
 	unsigned int child_pid = add_task(entrypoint, input, output, DEFAULT_PRIORITY, MORTAL , arg0);
-
-	sysWrite(1, "add child task\n", _strlen("add child task\n"));
 
 	add_child(get_current_pid(), child_pid);
 

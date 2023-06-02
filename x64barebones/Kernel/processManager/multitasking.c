@@ -154,18 +154,15 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 		return ERROR_NO_SPACE_FOR_TASK;
 	}
 
-	sysWrite(1, "add task inicio\n", _strlen("add task inicio\n"));
 	currentDimTasks++;
 
 	int pos;
 	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++) {
 		int num = get_current_pid();
-		printf("%d\n", num);
+		//printf("%d\n", num);
 	};	// find a free space
 
-	sysWrite(1, "pre malloc\n", _strlen("pre malloc\n"));
 	uint8_t * stackEnd = (uint8_t *)mm_malloc(STACK_SIZE);
-	sysWrite(1, "malloc\n", _strlen("malloc\n"));
 
 	if(stackEnd == NULL)
 		return ERROR_NO_SPACE_FOR_TASK;
@@ -192,10 +189,9 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 
 	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++) {
 		int num = get_current_pid();
-		printf("%d\n", num);
+		//printf("%d\n", num);
 	};
 
-	sysWrite(1, "add task fin\n", _strlen("add task fin\n"));
 	return tasks[pos].pid;
 }
 

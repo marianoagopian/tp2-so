@@ -95,6 +95,7 @@ char ** make_params(char ** words, unsigned int len){
         params[i] = param2;
     }
     params[i] = NULL;
+
     return params;
 }
 
@@ -129,9 +130,7 @@ int piped_process_handle(char ** words, unsigned int amount_of_words){
 }
 
 void single_process_handle(char ** words, unsigned int amount_of_words){
-    printf("LLEGO HASTA ACA");
-     unsigned int program_pos = check_valid_program(words[0]);
-    printf("HASTA ACA TAMBIEN");
+    unsigned int program_pos = check_valid_program(words[0]);
 
     if(program_pos == -1){
         printf(INVALID_COMMAND_MSG);
@@ -143,29 +142,27 @@ void single_process_handle(char ** words, unsigned int amount_of_words){
     }
 
 
-    printf("aca lo tiene que llamar a jorge\n");
     // Check if user wants to run program in background
-    int i, backgroud_indiaction = 0;
-    for(i=programs[program_pos].args + 1; !backgroud_indiaction && i<amount_of_words; i++){
+    int i, backgroud = 0;
+    for(i=programs[program_pos].args + 1; !backgroud && i<amount_of_words; i++){
         if(strcmp("//", words[i]) == 0){         // We consider the symbol as the last argument. All subsequent arguments will be ignored
-            backgroud_indiaction = 2;       
+            backgroud = 2;       
         }
         else if(strcmp("/", words[i]) == 0){         // We consider the symbol as the last argument. All subsequent arguments will be ignored
-            backgroud_indiaction = 1;       
+            backgroud = 1;       
         }
     }
 
     // Run in background
-    if(backgroud_indiaction == 2){
+    if(backgroud == 2){
         sys_register_process(programs[program_pos].ptrToFunction, STDIN, BACKGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); 
     }
-    else if(backgroud_indiaction == 1){
+    else if(backgroud == 1){
         sys_register_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); 
     }
 
     // Run on screen
-    else{
-        printf("Run on screen\n");
+    else{        
         sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND, (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
     
         sys_wait_for_children();
@@ -183,6 +180,7 @@ void shell() {
     scanf(readBuffer, BUFFER_LENGTH);
 
     int commandWords = parseCommand(command, readBuffer);
+
 
     if(piped_process_handle(command,commandWords) == 0){
       single_process_handle(command,commandWords);
