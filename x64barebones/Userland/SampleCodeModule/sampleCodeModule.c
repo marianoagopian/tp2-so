@@ -7,8 +7,6 @@
 #include <shell.h>
 
 int main() {
-	sys_holder(5);
-
 	clearScreen();
 
 	shell();

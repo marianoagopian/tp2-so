@@ -158,8 +158,7 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 
 	int pos;
 	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++) {
-		int num = get_current_pid();
-		//printf("%d\n", num);
+		;
 	};	// find a free space
 
 	uint8_t * stackEnd = (uint8_t *)mm_malloc(STACK_SIZE);
@@ -186,11 +185,6 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 
 	tasks[pos].input = input;
 	tasks[pos].output = output;
-
-	for(pos=0; tasks[pos].state!=DEAD_PROCESS ;pos++) {
-		int num = get_current_pid();
-		//printf("%d\n", num);
-	};
 
 	return tasks[pos].pid;
 }

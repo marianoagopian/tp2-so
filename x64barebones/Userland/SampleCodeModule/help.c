@@ -1,5 +1,6 @@
 #include <commands.h>
 #include <functions.h>
+#include <shell.h>
 
 const char* helpString = 
   "clear           							Clears screen's content\n"
@@ -14,4 +15,5 @@ const char* helpString =
 
 void help() {
 	print(helpString, strlen(helpString));
+	shell();
 }

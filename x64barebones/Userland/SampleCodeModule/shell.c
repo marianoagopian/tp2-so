@@ -181,6 +181,8 @@ void shell() {
 
     int commandWords = parseCommand(command, readBuffer);
 
+    if(commandWords == 0)
+      continue;
 
     if(piped_process_handle(command,commandWords) == 0){
       single_process_handle(command,commandWords);
