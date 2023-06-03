@@ -33,10 +33,11 @@ static programInfo programs[] = {
   {.name = "invalidopcode", .ptrToFunction = (uint64_t) &invalidOperationCode, .args = 0, .pipe = 0},
   {.name = "printmem", .ptrToFunction = (uint64_t) &printmem, .args = 1, .pipe = 0},
   {.name = "time", .ptrToFunction = (uint64_t) &time, .args = 0, .pipe = 0},
+  {.name = "ps", .ptrToFunction = (uint64_t) &ps, .args = 0, .pipeable = 1},
   {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0},
   {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
   {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},
-  {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 0, .pipe = 0}
+  {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 1, .pipe = 0}
 };
 
 
@@ -162,9 +163,9 @@ void single_process_handle(char ** words, unsigned int amount_of_words){
     }
 
     // Run on screen
-    else{        
-        sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND, (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
-    
+    else{
+        printf("aca esta jorge\n");
+        sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND,  (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
         sys_wait_for_children();
     }
     

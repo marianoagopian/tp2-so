@@ -136,8 +136,8 @@ uint64_t build_stack(uint64_t entrypoint, char ** arg0, uint64_t stackEnd){
 
 	// --- "Stack frame" for process ---
 
-	*(STACK_POS(IP_POS)) = entrypoint;	
-	*(STACK_POS(CS_POS)) = CS_VALUE;				
+	*(STACK_POS(IP_POS)) = entrypoint;
+	*(STACK_POS(CS_POS)) = CS_VALUE;
 	
 	*(STACK_POS(FLAGS_POS)) = FLAG_VALUES;
 	
@@ -161,7 +161,7 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 		;
 	};	// find a free space
 
-	uint8_t * stackEnd = (uint8_t *)mm_malloc(STACK_SIZE);
+	uint8_t * stackEnd = mm_malloc(STACK_SIZE);
 
 	if(stackEnd == NULL)
 		return ERROR_NO_SPACE_FOR_TASK;
@@ -179,6 +179,7 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 
 	tasks[pos].stackStart = stackStart;
 	tasks[pos].stackEnd = stackEnd;
+
 
 	tasks[pos].params = arg0;
 	tasks[pos].ticks = 1;
@@ -232,8 +233,6 @@ void forceChangeTask(){
 	currentRemainingTicks = tasks[currentTask].priority + 1;
 	forceTimerTick();
 }
-
-
 
 
 /* --- Process management --- */

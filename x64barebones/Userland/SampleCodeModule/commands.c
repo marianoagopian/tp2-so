@@ -2,7 +2,7 @@
 #include <functions.h>
 #include <exceptions.h>
 #include <syscalls.h>
-
+/*
 #define PARAMETERS_ERROR "Parameters are not needed for this command, try without them.\n"
 
 static const char* commands[COMMANDS_QTY] = { "clear", "changeFontSize", "divbyzero", "help", "inforeg",  "invalidopcode", "printmem",  "time", "tron" };
@@ -78,3 +78,4 @@ void callFunction(char * command, char * parameter) {
       break;
     }
 }
+*/

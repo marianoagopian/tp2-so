@@ -13,15 +13,14 @@ typedef struct P_rq {
   enum State state;
 } p_rq;
 
-int64_t test_processes(int64_t argc, char *argv[]) {
+int64_t test_processes(char **argv) {
   uint8_t rq;
   uint8_t alive = 0;
   uint8_t action;
   uint64_t max_processes;
   char *argvAux[] = {0};
 
-  if (argc != 1)
-    return -1;
+  printf("\"%s\"",argv[1]);
 
   if ((max_processes = satoi(argv[0])) <= 0)
     return -1;

@@ -15,5 +15,4 @@ const char* helpString =
 
 void help() {
 	print(helpString, strlen(helpString));
-	shell();
 }

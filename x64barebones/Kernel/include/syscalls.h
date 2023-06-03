@@ -7,6 +7,50 @@
 
 #define REGISTERS 15
 
+#define SYS_READ 0
+#define SYS_WRITE 1
+#define SYS_INFOREG 2
+#define SYS_TIME 3 
+#define SYS_CLEAR_SCREEN 4
+#define SYS_BEEP 5
+#define SYS_PRINT_MEM 6
+//#define SYS_DRAW_RECT 7
+#define SYS_CHECK_BUFFER 8
+#define SYS_HOLDER 9  
+#define SYS_CLEAR_BUFFER 10
+#define SYS_SET_LEVEL 11
+#define SYS_GET_LEVEL 12
+#define SYS_STOP 13
+
+#define SYS_ALLOC 14
+#define SYS_DESTROY_PIPE 15
+#define SYS_DESTROY_SEM 16
+#define SYS_FREE 17
+#define SYS_GET_PID 18
+#define SYS_KILL_PROCESS 19
+#define SYS_MM_STATUS 20
+#define SYS_NICE 21
+#define SYS_PAUSE_PROCESS 22
+#define SYS_PIPE_INFO 23
+#define SYS_PROCESS_ALIVE 24
+#define SYS_PROCESS_INFO 25
+#define SYS_READ_PIPE 26
+#define SYS_REGISTER_CHILD_PROCESS 27
+#define SYS_REGISTER_PIPE_AVAILABLE 28
+#define SYS_REGISTER_PROCESS 29
+#define SYS_REGISTER_SEM 30
+#define SYS_REGISTER_SEM_AVAILABLE 31
+#define SYS_RENOUNCE_CPU 32
+#define SYS_SIGNAL_SEM 33
+#define SYS_WAIT_FOR_CHILDREN 34
+#define SYS_WAIT_SEM 35
+#define SYS_WRITE_PIPE 36
+
+/*
+#define SYS_REGISTER_PIPE 
+#define SYS_SEMAPHORE_INFO
+*/
+
 uint64_t sysWrite(unsigned int fd, const char * buf, unsigned int count);
 
 void sysClear();

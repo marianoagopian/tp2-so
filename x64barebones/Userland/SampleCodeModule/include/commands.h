@@ -15,7 +15,9 @@ void callFunction(char * command, char * parameter);
 
 void sys_clear_screen();
 
-void changeFontSize(char *par);
+void changeFontSize(char ** par);
+
+void ps();
 
 void divByZero();
 
@@ -37,7 +39,7 @@ uint64_t test_mm(uint64_t argc, char *argv[]);
 
 void test_prio();
 
-int64_t test_processes(int64_t argc, char *argv[]);
+int64_t test_processes(char *argv[]);
 
 
 
