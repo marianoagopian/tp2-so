@@ -1,6 +1,6 @@
 #include "./include/syscalls.h"
 #include <color.h>
-#include <functions.h>
+#include "./include/functions.h"
 #include <stdarg.h>
 
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -157,4 +157,23 @@ void * memset(void * destiation, int32_t c, uint64_t length) {
 		dst[length] = chr;
 
 	return destiation;
+}
+
+uint64_t aToI(const char * string) {
+    uint64_t result = 0;
+
+    for(int i = 0 ; string[i] ; i++) {
+        result = result*10 + string[i] - '0';
+    }
+
+    return result;
+}
+
+uint8_t isNum(const char * string) {
+    for(int i=0; string[i]!=0; i++) {
+        if(string[i]>'9' || string[i]<'0') {
+            return 0;
+        }
+    }
+    return 1;
 }

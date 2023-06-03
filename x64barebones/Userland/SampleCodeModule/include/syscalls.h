@@ -47,7 +47,6 @@
 #define SYS_WAIT_FOR_CHILDREN 34
 #define SYS_WAIT_SEM 35
 #define SYS_WRITE_PIPE 36
-
 /*
 #define SYS_REGISTER_PIPE 
 #define SYS_SEMAPHORE_INFO

@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+uint64_t aToI(const char * string);
+
+uint8_t isNum(const char * string);
+
 void putchar(char c);
 
 void print(const char* buf, uint64_t count);

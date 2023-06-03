@@ -19,6 +19,10 @@ void changeFontSize(char ** par);
 
 void ps();
 
+void loop();
+
+void kill(char ** args);
+
 void divByZero();
 
 void help();

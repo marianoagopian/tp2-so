@@ -9,7 +9,10 @@ const char* helpString =
 	"help				               Prints all commands and their description.\n"
 	"inforeg						 				     Prints the value of the registers when screenshotted. Use ESCAPE to screenshot\n"
 	"invalidopcode							   Simulates the error that occurs when using an invalid operation code.\n"
-  "printmem							  		    Given an address pointer prints the following 32 bytes.\n"
+    "printmem							  		    Given an address pointer prints the following 32 bytes.\n"
+	"ps				                   \n"
+	"loop				               \n"
+	"kill				               \n"
 	"time				               Prints the current time.\n"
 	"tron				               Executes the game tron light cycle.\n";
 
