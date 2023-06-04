@@ -3,13 +3,14 @@
 #include <video.h>
 #include <interrupts.h>
 #include <lib.h>
+#include <syscalls.h>
 
 static const char scanCodeTable[256] = {
     0,  ESCAPE,  '1',  '2',  '3',  '4',  '5',  '6',   '7',  '8',  '9',   '0',   '-',  '=',    '\b',
     '\t', 'q',  'w',  'e',  'r',  't',  'y',  'u',  'i',   'o',  'p',  '[',   ']',  '\n',
     0,     'a',  's', 'd',  'f',  'g',  'h',  'j',  'k',  'l', ';' ,  '\'',
     0,    0,  0,   'z',  'x',  'c', 'v', 'b',  'n',  'm',  ',',  '.',  '/',    0,
-    '*',     0,  ' ',    0,     0,     0,    0,       0,         0,
+    '*',     CTRL,  ' ',    0,     0,     0,    0,       0,         0,
 };
 
 /*-------- CONSTANTS --------*/
@@ -19,6 +20,7 @@ static const char scanCodeTable[256] = {
 static char keyBuffer[BUFFER_SIZE];             // Buffer de caracters de teclado
 static int writePos;				// Posicion a escribir en el buffer
 static int index = 0;
+static int ctrl = 0;
 
 
 void keyboard_handler(uint64_t * regDumpPos) {
@@ -29,6 +31,21 @@ void keyboard_handler(uint64_t * regDumpPos) {
 		saveInfoReg(regDumpPos);
 		return;
 	}
+
+  if (c == CTRL) {
+    ctrl = 1;
+    return;
+  } else if(ctrl && scanCodeTable[c] == 'c') {
+    kill_screen_processes();
+    ctrl = 0;
+    return;
+  } else if(ctrl && scanCodeTable[c] == 'd') {
+    sysClear();
+    ctrl = 0;
+    return;
+  } else {
+    ctrl = 0;
+  }
     
 	if(writePos < BUFFER_SIZE) {
 		keyBuffer[writePos++] = c;
