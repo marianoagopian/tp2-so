@@ -38,6 +38,7 @@ static programInfo programs[] = {
   {.name = "kill", .ptrToFunction = (uint64_t) &kill, .args = 1, .pipe= 0},
   {.name = "nice", .ptrToFunction = (uint64_t) &nice, .args = 2, .pipe = 0},
   {.name = "block", .ptrToFunction = (uint64_t) &block, .args = 1, .pipe = 0},
+  {.name = "cat", .ptrToFunction = (uint64_t) &cat, .args = 0, .pipe = 1},
   {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0},
   {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
   {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},
