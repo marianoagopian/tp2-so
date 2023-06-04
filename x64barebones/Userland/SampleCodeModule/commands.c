@@ -60,5 +60,8 @@ void kill(char ** args){
     return;
   }
   uint64_t pid = aToI(args[1]);
-  sys_kill_process(pid);
+  if (sys_kill_process(pid) == ERROR_PID){
+    printf(INVALID_PID_MSG);
+  }
+  return;
 }

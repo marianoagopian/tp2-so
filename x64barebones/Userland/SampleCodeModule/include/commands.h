@@ -8,6 +8,8 @@
 #define BUFFER_LENGTH 256
 
 #define INVALID_COMMAND_MSG "-Invalid command. Check available commands with help.\n"
+#define INVALID_PID_MSG "Invalid PID: No such process is running.\n"
+#define ERROR_PID -1
 
 void checkCommand(char command[BUFFER_LENGTH], char parameter[PARAMETER_LENGTH], char readbuf[BUFFER_LENGTH]);
 
