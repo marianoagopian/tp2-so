@@ -6,12 +6,11 @@
 #define ACTIVE_PROCESS 1
 #define PAUSED_PROCESS 2
 #define NUM_LOOP 200000000 //0.2 sec
-#define SIZE 1024
 #define EOF -1
 
 void ps(){
 
-	process_info * info = sys_alloc(20 * sizeof(process_info)); //need a cast
+	process_info * info = (void *)sys_alloc(20 * sizeof(process_info)); //need a cast
 
 	if(info == NULL) {
 		printf("No more space\n");
@@ -94,4 +93,17 @@ void cat(){
   while ((c = getChar()) != EOF) { // Read input until there's no more input
       putchar(c); // Print the character
   }
+}
+
+
+void wc(){
+  int c, counter = 1;
+  while ((c = getChar()) != EOF)
+  {
+    if (c == '\n')
+      counter++;
+  }
+  printf("La cantidad de lineas escritas fueron: %d", counter);
+  return;
+
 }

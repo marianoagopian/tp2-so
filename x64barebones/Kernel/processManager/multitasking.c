@@ -82,6 +82,22 @@ void enableMultiTasking(){
 }
 
 
+char * intToString(int num, char *buffer) {
+    if(num==0) {
+        buffer[0] = '0';
+        buffer[1] = 0;
+        return buffer;
+    }
+    int i = 0;
+    while(num > 0) {
+        buffer[i++] = num % 10 + '0';
+        num /= 10;
+    }
+    reverseString(buffer, i);
+    buffer[i] = 0;
+    return buffer;
+}
+
 /* --- Getters --- */
 unsigned int get_current_pid(){
 	return tasks[currentTask].pid;
@@ -325,6 +341,7 @@ unsigned int change_priority(unsigned int pid, int delta) {
 	if(pos < 0)
 		return NO_TASK_FOUND;
 
+	char * buffer[20];
 	if(delta > MAX_PRIORITY)
 		tasks[pos].priority = MAX_PRIORITY;
 	else if(delta < 1)

@@ -22,7 +22,7 @@ typedef struct programInfo {
   uint8_t pipe;
 } programInfo;
 
-#define PROGRAMS_QTY 17
+#define PROGRAMS_QTY 19
 
 static programInfo programs[] = {
   {.name = "clear", .ptrToFunction = (uint64_t) &sys_clear_screen, .args = 0, .pipe = 0},
@@ -39,6 +39,7 @@ static programInfo programs[] = {
   {.name = "nice", .ptrToFunction = (uint64_t) &nice, .args = 2, .pipe = 0},
   {.name = "block", .ptrToFunction = (uint64_t) &block, .args = 1, .pipe = 0},
   {.name = "cat", .ptrToFunction = (uint64_t) &cat, .args = 0, .pipe = 1},
+  {.name = "wc", .ptrToFunction = (uint64_t) &wc, .args = 0, .pipe = 0},
   {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0},
   {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
   {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},

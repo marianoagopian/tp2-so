@@ -32,17 +32,11 @@ void sysClear() {
   clean_screen();
 }
 
-int sysRead(unsigned int fd, char * buf, unsigned int count){
-	int totalRead = 0;
-	int readResult;
+unsigned int sysRead(unsigned int fd, char * buf, unsigned int count){
+	unsigned int totalRead = 0;
     do {
         _hlt();
-        readResult = readKeyboardCharacters(buf + totalRead, count - totalRead);
-        if (readResult == -1) {
-            totalRead = -1; // Set totalRead to -1 to indicate end of input
-            break;
-        }
-        totalRead += readResult;
+        totalRead = readKeyboardCharacters(buf + totalRead, count - totalRead);
     } while (totalRead == 0);
     return totalRead;
 }
@@ -189,6 +183,10 @@ uint64_t sysRegisterChildProcess(uint64_t entryPoint, uint8_t input, uint8_t out
 
 uint64_t sysRegisterPipeAvailable(){
 	return create_pipe_available();
+}
+
+uint64_t sysRegisterPipe(unsigned int pipe_id){
+	return create_pipe(pipe_id);
 }
 
 uint64_t sysRegisterProcess(uint64_t entrypoint, uint8_t input, uint8_t output, char ** arg0){

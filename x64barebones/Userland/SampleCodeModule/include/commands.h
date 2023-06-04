@@ -31,6 +31,8 @@ void block(char ** args);
 
 void cat();
 
+void wc();
+
 void divByZero();
 
 void help();

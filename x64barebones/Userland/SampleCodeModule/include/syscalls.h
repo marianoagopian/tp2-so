@@ -47,11 +47,8 @@
 #define SYS_WAIT_FOR_CHILDREN 34
 #define SYS_WAIT_SEM 35
 #define SYS_WRITE_PIPE 36
-/*
-#define SYS_REGISTER_PIPE 
-#define SYS_SEMAPHORE_INFO
-*/
-
+#define SYS_SEMAPHORE_INFO 37
+#define SYS_REGISTER_PIPE 38
 
 /* The width of a character in pixels. */
 #define CHAR_WIDTH 9
@@ -96,4 +93,7 @@ uint64_t sys_signal_sem(unsigned int sem_id);
 uint64_t sys_wait_for_children();
 uint64_t sys_wait_sem(unsigned int sem_id);
 uint64_t sys_write_pipe(unsigned int pipe_id, const char * src, unsigned int count);
+uint64_t sys_semaphore_info(semaphore_info * info);
+uint64_t sys_register_pipe(unsigned int pipe_id);
+
 #endif

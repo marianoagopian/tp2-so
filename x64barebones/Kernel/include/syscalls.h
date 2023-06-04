@@ -21,7 +21,6 @@
 #define SYS_SET_LEVEL 11
 #define SYS_GET_LEVEL 12
 #define SYS_STOP 13
-
 #define SYS_ALLOC 14
 #define SYS_DESTROY_PIPE 15
 #define SYS_DESTROY_SEM 16
@@ -45,17 +44,15 @@
 #define SYS_WAIT_FOR_CHILDREN 34
 #define SYS_WAIT_SEM 35
 #define SYS_WRITE_PIPE 36
+#define SYS_SEMAPHORE_INFO 37
+#define SYS_REGISTER_PIPE 38
 
-/*
-#define SYS_REGISTER_PIPE 
-#define SYS_SEMAPHORE_INFO
-*/
 
 uint64_t sysWrite(unsigned int fd, const char * buf, unsigned int count);
 
 void sysClear();
 
-int sysRead(unsigned int fd, char * buf, unsigned int count);
+unsigned int sysRead(unsigned int fd, char * buf, unsigned int count);
 
 void saveInfoReg(uint64_t * regDumpPos);
 
@@ -130,4 +127,9 @@ uint64_t sysWaitSem(unsigned int sem_id);
 uint64_t sysWritePipe(unsigned int pipe_id, const char * src, unsigned int count);
 
 uint64_t sysWriteToScreen(const char *buf, unsigned int count);
+
+uint64_t sysSemaphoreInfo(semaphore_info * info);
+
+uint64_t sysRegisterPipe(unsigned int pipe_id);
+
 #endif

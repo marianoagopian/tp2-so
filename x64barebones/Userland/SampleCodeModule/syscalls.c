@@ -150,11 +150,11 @@ uint64_t sys_write_pipe(unsigned int pipe_id, const char * src, unsigned int cou
     return syscaller(SYS_WRITE_PIPE, (uint64_t) pipe_id, (uint64_t) src, (uint64_t) count , NULL );
 }
 
-/*
-uint64_t sys_register_pipe(unsigned int pipe_id){
-    return syscaller(SYS_REGISTER_PIPE, (uint64_t) pipe_id, NULL, NULL , NULL );    
-}
 uint64_t sys_semaphore_info(semaphore_info * info){
     return syscaller(SYS_SEMAPHORE_INFO, (uint64_t) info, NULL, NULL , NULL );    
 }
-*/
+
+uint64_t sys_register_pipe(unsigned int pipe_id){
+    return syscaller(SYS_REGISTER_PIPE, (uint64_t) pipe_id, NULL, NULL , NULL );    
+}
+

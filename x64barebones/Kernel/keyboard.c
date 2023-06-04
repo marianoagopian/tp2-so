@@ -4,6 +4,7 @@
 #include <interrupts.h>
 #include <lib.h>
 #include <syscalls.h>
+#include <multitasking.h>
 
 static const char scanCodeTable[256] = {
     0,  ESCAPE,  '1',  '2',  '3',  '4',  '5',  '6',   '7',  '8',  '9',   '0',   '-',  '=',    '\b',
@@ -61,7 +62,6 @@ unsigned int readKeyboardCharacters(char* buf, unsigned int n) {
       if (c>0 && c<128)
           buf[charsRead++] = scanCodeTable[c];
   }
-
   writePos -= scancodeIndex;
   memcpy(keyBuffer, keyBuffer + scancodeIndex, writePos);
   _sti();
