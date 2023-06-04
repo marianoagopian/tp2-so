@@ -27,6 +27,8 @@ void kill(char ** args);
 
 void nice(char ** args);
 
+void block(char ** args);
+
 void divByZero();
 
 void help();

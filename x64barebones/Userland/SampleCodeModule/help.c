@@ -14,6 +14,7 @@ const char* helpString =
 	"loop				               Prints its ID every 0.2 seconds. Beware! it will never end!\n"
 	"kill				               Given a process ID it terminates it.\n"
 	"nice				               Given an ID and priority (number) changes a process' priority.\n"
+	"block				               Given an ID changes a process' state between blocked and ready.\n"
 	"time				               Prints the current time.\n"
 	"tron				               Executes the game tron light cycle.\n";
 

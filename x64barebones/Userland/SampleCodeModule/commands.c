@@ -56,7 +56,7 @@ void loop(){
 
 void kill(char ** args){
 	if(!isNum(args[1])) { 
-    printf("Invalid argument! Argument must be number.");
+    printf("Invalid argument! Argument must be number.\n");
     return;
   }
   uint64_t pid = aToI(args[1]);
@@ -67,11 +67,21 @@ void kill(char ** args){
 }
 
 void nice(char ** args){
-    if(!isNum(args[1]) && !isNum(args[2])) { 
-        printf("Invalid argument! Arguments must be numbers.");
-        return;
-    }
-    unsigned int pid = aToI(args[1]);
-    int delta = aToI(args[2]);
-	  sys_nice(pid, delta);
+  if(!isNum(args[1]) && !isNum(args[2])) { 
+      printf("Invalid argument! Arguments must be numbers.\n");
+      return;
+  }
+  unsigned int pid = aToI(args[1]);
+  int delta = aToI(args[2]);
+  sys_nice(pid, delta);
+}
+
+void block(char ** args){
+  if(!isNum(args[1])) { 
+    printf("Invalid argument! Argument must be number.\n");
+    return;
+  }
+  //check because the only blocked process is shell so cant test
+  uint64_t pid = aToI(args[1]);
+  return;
 }
