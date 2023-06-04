@@ -19,7 +19,7 @@
 										/*		 -=-=STACK=-=-		*/
 #define STACK_POINT_OF_ENTRY (21*8)   	/*  	|	RAX, RBX  |		*/
 										/*  	|	RCX, etc  |		*/   
-#define RDI_POS   (12*8)				/*		---------------		*/ 
+#define RDI_POS   (13*8)				/*		---------------		*/ 
 #define IP_POS    (6*8)					/*  	|	 RIP	  |		*/				
 #define CS_POS 	  (5*8)					/*  	|	  CS	  |		*/
 #define FLAGS_POS (4*8)					/*  	|	 RFLAGS	  |		*/
@@ -130,7 +130,7 @@ uint64_t build_stack(uint64_t entrypoint, char ** arg0, uint64_t stackEnd){
 
 	// --- We put all registers to 0 ---
 	for(int i=7 ; i<21 ; i++){
-		if(i!=12)
+		if(i!=13)
 			*(STACK_POS(i * 8)) = 0;
 	}
 

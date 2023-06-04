@@ -27,13 +27,14 @@ int strToNum(char *str){
 
 void changeFontSize(char **par){
   // printf("par[0] = %s\n", par[0]);
-  printf("par[1] = %s\n", par[1]);
   /*
   if(**par == 0) {
     print(noArgument, strlen(noArgument));
     return;
   }*/
   int level = strToNum(par[1]);
+  printf("par[1] = %d\n", level);
+
   if(level < 1 || level > 3){
     printf("The parameter must be a number between 1 and 3\n");
     return;
