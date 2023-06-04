@@ -20,14 +20,14 @@ int64_t test_processes(char **argv) {
   uint64_t max_processes;
   char *argvAux[] = {0};
 
-  printf("\"%s\"",argv[1]);
-
-  if ((max_processes = satoi(argv[0])) <= 0)
+  if ((max_processes = satoi(argv[1])) <= 0)
     return -1;
 
   p_rq p_rqs[max_processes];
 
   while (1) {
+
+    printf("test_processes: Creating %d processes\n", max_processes);
 
     // Create max_processes processes
     for (rq = 0; rq < max_processes; rq++) {

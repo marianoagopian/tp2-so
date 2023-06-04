@@ -22,7 +22,7 @@ typedef struct programInfo {
   uint8_t pipe;
 } programInfo;
 
-#define PROGRAMS_QTY 12
+#define PROGRAMS_QTY 15
 
 static programInfo programs[] = {
   {.name = "clear", .ptrToFunction = (uint64_t) &sys_clear_screen, .args = 0, .pipe = 0},
