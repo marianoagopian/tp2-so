@@ -3,21 +3,27 @@
 #include <shell.h>
 
 const char* helpString = 
-  "clear           							Clears screen's content\n"
-	"changefontsize    			  Given a number between 1 and 3 as a parameter it changes the font size\n"
-	"divbyzero								      Simulates the error that occurs when dividing by zero.\n"
-	"help				               Prints all commands and their description.\n"
-	"inforeg						 				     Prints the value of the registers when screenshotted. Use ESCAPE to screenshot\n"
-	"invalidopcode							   Simulates the error that occurs when using an invalid operation code.\n"
-    "printmem							  		    Given an address pointer prints the following 32 bytes.\n"
-	"ps				                 Prints processes' properties.\n"
-	"loop				               Prints its ID every 0.2 seconds. Beware! it will never end!\n"
-	"kill				               Given a process ID it terminates it.\n"
-	"nice				               Given an ID and priority (number) changes a process' priority.\n"
-	"block				               Given an ID changes a process' state between blocked and ready.\n"
-	"cat				               Prints parameter as it is received\n"
-	"time				               Prints the current time.\n"
-	"tron				               Executes the game tron light cycle.\n";
+  "block                Given a pid changes that process state to blocked\n"
+  "cat                  Prints stdin as received\n"
+  "clear                Clears screen's content\n"
+	"changefontsize       Given a number between 1 and 3 as a parameter it changes the font size\n"
+	"divbyzero            Simulates the error that occurs when dividing by zero\n"
+  "filter               Filters vowels on input\n"
+	"help                 Prints all commands and their description\n"
+	"inforeg              Prints the value of the registers when screenshotted. Use ESCAPE to screenshot\n"
+	"invalidopcode        Simulates the error that occurs when using an invalid operation code\n"
+  "phylo                Implements phylosophers problem\n"
+  "printmem             Given an address pointer prints the following 32 bytes\n"
+	"ps                   Shows every running process and it's state\n"
+  "mem                  Prints memory status\n"
+  "nice                 Given a pid changes priority of process\n"
+	"loop                 Given a number prints its pid every that amount of seconds\n"
+	"kill                 Given a pid a process is ended\n"
+	"time                 Prints the current time\n"
+	"tron                 Executes the game tron light cycle\n"
+  "test-mm              Tests memory manager\n"
+  "test-process         Given a number test scheduling based on that amount of programs\n"
+  "test-prio            Tests pipes and semaphores\n";
 
 void help() {
 	print(helpString, strlen(helpString));

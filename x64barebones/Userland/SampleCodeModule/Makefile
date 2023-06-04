@@ -21,6 +21,6 @@ $(MODULE): $(ASMOBJECTS) $(COBJECTS)
 	$(ASM) $(ASMFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o ./comandos/*.o ./libs/*.o
+	rm -rf *.o ./comandos/*.o ./libs/*.o ./asm/*.o
 
 .PHONY: all clean print
