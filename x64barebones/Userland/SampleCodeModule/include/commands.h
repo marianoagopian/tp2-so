@@ -25,6 +25,8 @@ void loop();
 
 void kill(char ** args);
 
+void nice(char ** args);
+
 void divByZero();
 
 void help();

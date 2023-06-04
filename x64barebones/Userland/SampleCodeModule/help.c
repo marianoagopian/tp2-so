@@ -13,6 +13,7 @@ const char* helpString =
 	"ps				                   \n"
 	"loop				               \n"
 	"kill				               \n"
+	"nice				               Given an ID and priority (number) changes a process' priority.\n"
 	"time				               Prints the current time.\n"
 	"tron				               Executes the game tron light cycle.\n";
 
