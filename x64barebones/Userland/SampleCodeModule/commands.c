@@ -5,8 +5,9 @@
 
 #define ACTIVE_PROCESS 1
 #define PAUSED_PROCESS 2
-
 #define NUM_LOOP 200000000 //0.2 sec
+#define SIZE 1024
+#define EOF -1
 
 void ps(){
 
@@ -83,5 +84,14 @@ void block(char ** args){
   }
   //check because the only blocked process is shell so cant test
   uint64_t pid = aToI(args[1]);
+  sys_pause_process((unsigned int)pid);
   return;
+}
+
+//check eof result == sys_read has unsigned int result
+void cat(){
+  int c;
+  while ((c = getChar()) != EOF) { // Read input until there's no more input
+      putchar(c); // Print the character
+  }
 }

@@ -32,14 +32,19 @@ void sysClear() {
   clean_screen();
 }
 
-unsigned int sysRead(unsigned int fd, char * buf, unsigned int count){
-	unsigned int totalRead = 0;
-	do {
-			_hlt();
-			totalRead += readKeyboardCharacters(buf + totalRead, count - totalRead);
-		} while (totalRead == 0);
-
-	return totalRead;
+int sysRead(unsigned int fd, char * buf, unsigned int count){
+	int totalRead = 0;
+	int readResult;
+    do {
+        _hlt();
+        readResult = readKeyboardCharacters(buf + totalRead, count - totalRead);
+        if (readResult == -1) {
+            totalRead = -1; // Set totalRead to -1 to indicate end of input
+            break;
+        }
+        totalRead += readResult;
+    } while (totalRead == 0);
+    return totalRead;
 }
 
 static int hasScreenshoted = 0;

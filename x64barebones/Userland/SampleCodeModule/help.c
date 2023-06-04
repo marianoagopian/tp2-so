@@ -15,6 +15,7 @@ const char* helpString =
 	"kill				               Given a process ID it terminates it.\n"
 	"nice				               Given an ID and priority (number) changes a process' priority.\n"
 	"block				               Given an ID changes a process' state between blocked and ready.\n"
+	"cat				               Prints parameter as it is received\n"
 	"time				               Prints the current time.\n"
 	"tron				               Executes the game tron light cycle.\n";
 

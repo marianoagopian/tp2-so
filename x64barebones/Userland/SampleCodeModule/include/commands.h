@@ -29,6 +29,8 @@ void nice(char ** args);
 
 void block(char ** args);
 
+void cat();
+
 void divByZero();
 
 void help();
@@ -50,7 +52,6 @@ uint64_t test_mm(uint64_t argc, char *argv[]);
 void test_prio();
 
 int64_t test_processes(char *argv[]);
-
 
 
 #endif

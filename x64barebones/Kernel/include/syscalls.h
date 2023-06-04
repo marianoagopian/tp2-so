@@ -55,7 +55,7 @@ uint64_t sysWrite(unsigned int fd, const char * buf, unsigned int count);
 
 void sysClear();
 
-unsigned int sysRead(unsigned int fd, char * buf, unsigned int count);
+int sysRead(unsigned int fd, char * buf, unsigned int count);
 
 void saveInfoReg(uint64_t * regDumpPos);
 
