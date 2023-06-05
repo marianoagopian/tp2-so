@@ -8,6 +8,7 @@
 /* --- CONSTANTS  --- */
 #define ESCAPE 19
 #define CTRL 29
+#define EOF -1
 
 extern char getKey();
 

@@ -112,7 +112,7 @@ void cat(){
 
 
 void wc(){
-  int c, counter = 1; // Starts counting once it runs the command
+  int c, counter = 0; // Starts counting once it runs the command
   while ((c = getChar()) != EOF){
     if (c == '\n'){
       counter++;

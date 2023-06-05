@@ -25,7 +25,6 @@ static int ctrl = 0;
 
 
 void keyboard_handler(uint64_t * regDumpPos) {
-
 	int c = getKey();
 
 	if (scanCodeTable[c] == ESCAPE) {
@@ -43,7 +42,7 @@ void keyboard_handler(uint64_t * regDumpPos) {
     ctrl = 0;
     return;
   } else if(ctrl && scanCodeTable[c] == 'd') {
-    keyBuffer[writePos++] = -1; //EOF
+    keyBuffer[writePos++] = EOF;
     ctrl = 0;
     return;
   } else {
