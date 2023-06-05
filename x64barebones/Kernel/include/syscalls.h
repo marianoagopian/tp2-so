@@ -14,7 +14,8 @@
 #define SYS_CLEAR_SCREEN 4
 #define SYS_BEEP 5
 #define SYS_PRINT_MEM 6
-//#define SYS_DRAW_RECT 7 //TODO: CAMBIAR NUMEROS Y VER DRAW RECT
+#define SYS_DRAW_WHITE_RECT 7
+#define SYS_DRAW_GREEN_RECT 8
 #define SYS_HOLDER 9  
 #define SYS_CLEAR_BUFFER 10
 #define SYS_SET_LEVEL 11
@@ -45,6 +46,7 @@
 #define SYS_WRITE_PIPE 36
 #define SYS_SEMAPHORE_INFO 37
 #define SYS_REGISTER_PIPE 38
+#define SYS_CHECK_BUFFER 39
 
 
 uint64_t sysWrite(unsigned int fd, const char * buf, unsigned int count);
@@ -71,11 +73,15 @@ void sysSetLevel(int level);
 
 void sysHolder(int time);
 
-void sysDrawRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height, Color color);
+void sysDrawWhiteRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+
+void sysDrawGreenRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 
 void sysBeep(uint32_t frequence);
 
 void sysStop();
+
+char sysCheckBuffer();
 
 /* New syscalls SO*/
 
@@ -130,5 +136,7 @@ uint64_t sysWriteToScreen(const char *buf, unsigned int count);
 uint64_t sysSemaphoreInfo(semaphore_info * info);
 
 uint64_t sysRegisterPipe(unsigned int pipe_id);
+
+char sysCheckBuffer();
 
 #endif

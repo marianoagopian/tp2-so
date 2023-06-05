@@ -98,7 +98,7 @@ void addPhylo(){
         args[1] = buf;
         philos = args;
         pids[currentCount] = sys_register_child_process((uint64_t) &philosopher, STDIN, FOREGROUND, (uint64_t) philos);
-        if( pids[currentCount] <= 0) {
+        if(pids[currentCount] <= 0) {
             printf("error creating philosopher. aborting\n");
             return;
         }

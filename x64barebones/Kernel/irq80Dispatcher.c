@@ -10,7 +10,6 @@
 uint64_t irq80Dispatcher(uint64_t mode, uint64_t arg0, uint64_t arg1, 
 	uint64_t arg2, uint64_t arg3, uint64_t arg4, uint64_t arg5, uint64_t ss, uint64_t rsp) {
 	switch (mode) {
-
 		case SYS_READ:
 			return sysRead((unsigned int) arg0, (char *) arg1, (unsigned int) arg2);
 		case SYS_WRITE:
@@ -24,9 +23,15 @@ uint64_t irq80Dispatcher(uint64_t mode, uint64_t arg0, uint64_t arg1,
 			return 0;
 		case SYS_BEEP:
 			sysBeep((uint32_t) arg0);
-            return 0;
+			return 0;
 		case SYS_PRINT_MEM:
 			return sysPrintmem(arg0,(char*) arg1);
+		case SYS_DRAW_WHITE_RECT:
+			sysDrawWhiteRect((uint16_t) arg0, (uint16_t) arg1, (uint16_t) arg2, (uint16_t) arg3);
+			return 0;
+		case SYS_DRAW_GREEN_RECT:
+			sysDrawGreenRect((uint16_t) arg0, (uint16_t) arg1, (uint16_t) arg2, (uint16_t) arg3);
+			return 0;
 		case SYS_HOLDER:
 			sysHolder((int)arg0);
 			return 0;
@@ -87,9 +92,8 @@ uint64_t irq80Dispatcher(uint64_t mode, uint64_t arg0, uint64_t arg1,
 			return sysWaitSem((unsigned int) arg0);
 		case SYS_WRITE_PIPE:
 			return sysWritePipe((unsigned int) arg0, (char *)arg1, (unsigned int) arg2);
-        /*case SYS_DRAW_RECT:
-            sysDrawRect((uint16_t) arg0, (uint16_t) arg1, (uint16_t) arg2, (uint16_t) arg3, (Color) arg4);
-            return 0;*/
+		case SYS_CHECK_BUFFER:
+			return sysCheckBuffer();
 		default:
 			return INVALID_SYS_CALL;
 	}

@@ -35,6 +35,8 @@ void wc();
 
 void filter();
 
+void mem_status();
+
 void divByZero();
 
 void help();

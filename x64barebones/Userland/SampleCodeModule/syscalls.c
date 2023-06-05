@@ -34,10 +34,6 @@ uint64_t sys_printmem(uint64_t position, char * buffer){
     return syscaller(SYS_PRINT_MEM, position, (uint64_t)buffer, NULL , NULL );
 }
 
-uint8_t sys_check_buffer(){
-    return syscaller(SYS_CHECK_BUFFER, NULL, NULL, NULL , NULL );      
-}
-
 void sys_holder(int time){
     syscaller(SYS_HOLDER, (uint64_t)time, NULL, NULL , NULL );      
 }
@@ -155,6 +151,17 @@ uint64_t sys_semaphore_info(semaphore_info * info){
 }
 
 uint64_t sys_register_pipe(unsigned int pipe_id){
-    return syscaller(SYS_REGISTER_PIPE, (uint64_t) pipe_id, NULL, NULL , NULL );    
+    return syscaller(SYS_REGISTER_PIPE, (uint64_t) pipe_id, NULL, NULL , NULL );
 }
 
+void sys_draw_white_rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height){
+    syscaller(SYS_DRAW_WHITE_RECT, (uint64_t) x, (uint64_t) y, (uint64_t) width, (uint64_t) height);
+}
+
+void sys_draw_green_rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height){
+    syscaller(SYS_DRAW_GREEN_RECT, (uint64_t) x, (uint64_t) y, (uint64_t) width, (uint64_t) height);
+}
+
+uint8_t sys_check_buffer(){
+    return syscaller(SYS_CHECK_BUFFER, NULL, NULL, NULL , NULL );      
+}

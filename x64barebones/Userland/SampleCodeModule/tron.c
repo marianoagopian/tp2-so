@@ -49,8 +49,8 @@ void tron() {
     positions[y1/4][x1/4] = 1; //al atravesar el punto, marcamos esa posicion para que termine el juego si volvemos a pasar
     positions[y2/4][x2/4] = 1;
 
-    sys_draw_rect(x1,y1,4,4,green); 
-    sys_draw_rect(x2,y2,4,4,white);
+    sys_draw_green_rect(x1,y1,4,4); 
+    sys_draw_white_rect(x2,y2,4,4);
     moveCharacter(playerOneDirection, &x1, &y1);
     moveCharacter(playerTwoDirection, &x2, &y2);
 

@@ -20,6 +20,9 @@
 
 static uint64_t infoReg[REGISTERS] = {0};
 
+Color white = {0xFF, 0xFF, 0xFF};
+Color green = {0x1F, 0xED, 0x11};
+
 static int getFormat(int n) {
 	int dec = n & 240;
 	dec = dec >> 4;
@@ -116,8 +119,12 @@ void sysStop() {
   noSound();
 }
 
-void sysDrawRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height, Color color) {
-  drawRect(x, y, width, height, color);
+void sysDrawWhiteRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+  drawRect(x, y, width, height, white);
+}
+
+void sysDrawGreenRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+  drawRect(x, y, width, height, green);
 }
 
 uint64_t sysAlloc(uint64_t len) {
@@ -250,4 +257,8 @@ uint64_t sysWritePipe(unsigned int pipe_id, const char * src, unsigned int count
 
 uint64_t sysWriteToScreen(const char *buf, unsigned int count) {
 	return sysWrite(get_current_output(),buf,count);	
+}
+
+char sysCheckBuffer() {
+	return checkKeyboardBuffer();
 }

@@ -85,3 +85,10 @@ void cleanKeyboardBuffer() {
   writePos = 0;
   index = 0;
 }
+
+char checkKeyboardBuffer() {
+  if(index < writePos) {
+    return keyBuffer[index++];
+  }
+  return keyBuffer[index];
+}

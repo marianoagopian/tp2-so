@@ -16,14 +16,13 @@
 #define SYS_CLEAR_SCREEN 4
 #define SYS_BEEP 5
 #define SYS_PRINT_MEM 6
-//#define SYS_DRAW_RECT 7
-#define SYS_CHECK_BUFFER 8 //TODO: SACAR
+#define SYS_DRAW_WHITE_RECT 7
+#define SYS_DRAW_GREEN_RECT 8
 #define SYS_HOLDER 9  
 #define SYS_CLEAR_BUFFER 10
 #define SYS_SET_LEVEL 11
 #define SYS_GET_LEVEL 12
 #define SYS_STOP 13
-
 #define SYS_ALLOC 14
 #define SYS_DESTROY_PIPE 15
 #define SYS_DESTROY_SEM 16
@@ -49,6 +48,7 @@
 #define SYS_WRITE_PIPE 36
 #define SYS_SEMAPHORE_INFO 37
 #define SYS_REGISTER_PIPE 38
+#define SYS_CHECK_BUFFER 39
 
 /* The width of a character in pixels. */
 #define CHAR_WIDTH 9
@@ -62,7 +62,8 @@ uint64_t sys_time();
 void sys_clear_screen();
 void sys_beep(uint32_t frequency);
 uint64_t sys_printmem(uint64_t position, char * buffer);
-void sys_draw_rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height, Color color);
+void sys_draw_white_rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+void sys_draw_green_rect(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 uint8_t sys_check_buffer();
 void sys_holder(int time);
 void sys_clear_buffer();

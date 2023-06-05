@@ -9,6 +9,8 @@
 #define EOF -1
 #define BACKGROUND 0
 #define FOREGROUND 1
+#define MM_INFO 3
+#define SIZE 20
 
 void ps(){
 
@@ -110,12 +112,14 @@ void cat(){
 
 
 void wc(){
-  int c, counter = 1;
+  int c, counter = 1; // Starts counting once it runs the command
   while ((c = getChar()) != EOF){
-    if (c == '\n')
+    if (c == '\n'){
       counter++;
+    }
+    putchar(c);
   }
-  printf("Total written lines: %d", counter);
+  printf("Total new lines: %d\n", counter);
   return;
 
 }
@@ -126,5 +130,26 @@ void filter(){
     if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u'){
       putchar(c);
     }
+  }
+}
+
+// For printing purposes
+static  char * mmInfo[] = { "Allocated Bytes: ", "Free Bytes: ", "Allocated Blocks: "};
+
+void mem_status(){
+  uint64_t info[MM_INFO] = { 0 };
+  sys_mm_status(info);
+
+  printf("Total Memory: ");
+
+  char buffer[SIZE] = { 0 };
+  intToString(info[0] + info[1], buffer);
+  printf("%s\n", buffer);
+
+  for(int i = 0 ; i < MM_INFO ; i++){
+      char buf[SIZE] = {0};
+      printf("%s", mmInfo[i]);
+      intToString(info[i], buf);
+      printf("%s\n", buf);
   }
 }
