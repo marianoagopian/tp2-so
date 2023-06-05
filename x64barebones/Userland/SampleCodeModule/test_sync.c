@@ -7,8 +7,6 @@
 #define TOTAL_PAIR_PROCESSES 2
 #define MAX 500
 
-#define NULL 0
-
 static unsigned int global; // shared memory
 
 void slowInc(unsigned int *p, int inc) {

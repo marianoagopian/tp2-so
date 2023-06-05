@@ -18,8 +18,8 @@ static const char scanCodeTable[256] = {
 #define BUFFER_SIZE 200
 
 /*-------- STATIC FILE VARIABLES --------*/
-static char keyBuffer[BUFFER_SIZE];             // Buffer de caracters de teclado
-static int writePos;				// Posicion a escribir en el buffer
+static char keyBuffer[BUFFER_SIZE];             // Buffer for keyboard characters 
+static int writePos;				// Position in buffer for writing
 static int index = 0;
 static int ctrl = 0;
 

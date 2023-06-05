@@ -9,7 +9,7 @@ typedef struct queueADT{
     uint64_t  * array;
     unsigned int readPos;
     unsigned int writePos;
-    unsigned int amount;        // mucho mas entendible con una variable
+    unsigned int amount;        
     unsigned int size;
 }queueADT;
 

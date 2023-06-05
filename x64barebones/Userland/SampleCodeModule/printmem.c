@@ -10,10 +10,10 @@ static char * noArgument = "For this function argument is necessary\n";
 
 void printmem(char * arg) {
     if(*arg == 0) {
-        print(noArgument, strlen(noArgument)); //si no pasaron parametro enviamos el mensaje
+        print(noArgument, strlen(noArgument));
         return;
     }
-    if(!isNum(arg)) {                                            // recibe un string que puede o no ser un numero
+    if(!isNum(arg)) {                                          
         print(invalidArgument, strlen(invalidArgument));
         return;
     }

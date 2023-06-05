@@ -15,10 +15,10 @@ extern char getKey();
 /*
  * << keyboard_handler >>
  * ----------------------------------------------------------------------
- *  Descripcion: Handles keyboard functionality
+ *  Handles keyboard functionality
  * ----------------------------------------------------------------------
- *  Recibe: --
- *  Devuelve:
+ *  Receives noo parameters
+ *  Returns:
  *      1 <=> wrote buffer
  *      0 <=> otherwise
  */

@@ -37,6 +37,7 @@ static programInfo programs[] = {
   {.name = "ps", .ptrToFunction = (uint64_t) &ps, .args = 0, .pipe = 1},
   {.name = "loop", .ptrToFunction = (uint64_t) &loop, .args = 0, .pipe = 1},
   {.name = "kill", .ptrToFunction = (uint64_t) &kill, .args = 1, .pipe= 0},
+  {.name = "mem", .ptrToFunction = (uint64_t) &mem_status, .args = 0, .pipe = 0},
   {.name = "nice", .ptrToFunction = (uint64_t) &nice, .args = 2, .pipe = 0},
   {.name = "block", .ptrToFunction = (uint64_t) &block, .args = 1, .pipe = 0},
   {.name = "cat", .ptrToFunction = (uint64_t) &cat, .args = 0, .pipe = 1},
@@ -44,7 +45,6 @@ static programInfo programs[] = {
   {.name = "filter", .ptrToFunction = (uint64_t) &filter, .args = 0, .pipe = 1},
   {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0},
   {.name = "phylo", .ptrToFunction = (uint64_t) &phylo, .args = 0, .pipe = 0},
-  {.name = "mem", .ptrToFunction = (uint64_t) &mem_status, .args = 0, .pipe = 0},
   {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
   {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},
   {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 1, .pipe = 0},
@@ -79,14 +79,14 @@ unsigned int check_valid_program(char * string){
 }
 
 char ** make_params(char ** words, unsigned int len){
-    void * coso = (void*) sys_alloc((2 + len) * sizeof(char *)); // + 1 for name, + 1 por null termination
+    void * ptr = (void*) sys_alloc((2 + len) * sizeof(char *)); // + 1 for name, + 1 por null termination
 
-    if(coso == NULL){
-        printf(MALLOC_ERROR);     //TODO: replace
+    if(ptr == NULL){
+        printf(MALLOC_ERROR);   
         return NULL;
     }
 
-    char ** params = (char **) coso;
+    char ** params = (char **) ptr;
 
     void * param;
     int paramLen;
@@ -97,7 +97,7 @@ char ** make_params(char ** words, unsigned int len){
         param = (void*) sys_alloc(paramLen);
 
          if(param == NULL){
-            printf(MALLOC_ERROR);     //TODO: replace
+            printf(MALLOC_ERROR);     
             return NULL;
         }
 
@@ -153,6 +153,16 @@ void single_process_handle(char ** words, unsigned int amount_of_words){
         return;
     }
 
+    // Check if user wants to run program in background
+    int i;
+    for(i=programs[program_pos].args + 1; i < amount_of_words; i++){
+        if(strcmp(";", words[i]) == 0){ // We consider the symbol as the last argument. All subsequent arguments will be ignored
+            sys_register_process(programs[program_pos].ptrToFunction, STDIN, BACKGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); //Run on Background
+            return; 
+        }
+    }
+
+    // Run on screen
     sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND,  (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
     sys_wait_for_children();
     

@@ -2,8 +2,6 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "./include/syscalls.h"
 
-#define NULL 0
-
 extern uint64_t syscaller(uint64_t syscallID, uint64_t param1, uint64_t param2, uint64_t param3, uint64_t param4);
 
 uint64_t sys_read(uint64_t fd, const char * buf, unsigned int length){

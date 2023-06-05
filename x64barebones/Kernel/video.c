@@ -158,10 +158,10 @@ void printChar(char c) {
     Color black = {0x00, 0x00, 0x00};
 
     if (c == '\b') {
-        if(posX < CHAR_WIDTH * 4){ // para impedir que borre el >$:
+        if(posX < CHAR_WIDTH * 4){ // avoid deleting >$:
             return;
         }
-        posX -= CHAR_WIDTH * level; //retrocedemos un caracter
+        posX -= CHAR_WIDTH * level; // GO back one character
         drawRect(posX, posY, CHAR_WIDTH * level, CHAR_HEIGHT * level, black);
         return;
     }
@@ -188,7 +188,7 @@ void printChar(char c) {
 void printNewline(void) {
     posX = 0; // Paramos posX en el borde izquierdo
 
-    // Avanzamos pen y a la siguiente linea, si no hay lugar corremos toda la pantalla para arriba para dejar una nueva linea
+    // Continue with pen and to the next line, if there is no space left we scroll all the screen upwards and leave a new line
     if (posY + (2*CHAR_HEIGHT * MAX_LEVEL) <= screenData->height) {
         posY += CHAR_HEIGHT * level;
     } else {

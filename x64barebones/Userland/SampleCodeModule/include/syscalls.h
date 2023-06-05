@@ -1,9 +1,10 @@
 #ifndef _SYSCALLS_H_
 #define _SYSCALLS_H_
 
-#include <stdint.h>
 #include <color.h>
 #include "data_types.h"
+
+#define NULL 0
 
 #define BACKGROUND 0
 #define STDIN 1

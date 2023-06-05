@@ -24,10 +24,10 @@ int64_t test_processes(char **argv) {
     return -1;
 
   p_rq p_rqs[max_processes];
+  printf("test_processes: Creating %d processes\n", max_processes);
 
   while (1) {
 
-    printf("test_processes: Creating %d processes\n", max_processes);
 
     // Create max_processes processes
     for (rq = 0; rq < max_processes; rq++) {

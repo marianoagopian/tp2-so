@@ -41,12 +41,12 @@ void scanf(char* readbuf, uint64_t maxlen) {
     if (maxlen == 0)
         return;
 
-    // Leemos hasta maxlen-1 caracteres
+    // Read until maxlen-1 
     uint64_t count = 0;
     do {
         char c = getChar();
 
-        if (c == '\n') { // Si llegamos hasta \n termino el string
+        if (c == '\n') { // string ended
             readbuf[MIN(count, maxlen-1)] = '\0';
             print(&c, 1);
             return;
@@ -58,7 +58,7 @@ void scanf(char* readbuf, uint64_t maxlen) {
             print(&c, 1);
         }
          else {
-            //Agregamos el caracter al buffer 
+            //Added character to buffer 
 	        print(&c, 1);
             if (count < maxlen-1 && c != 0) {
                 readbuf[count] = c;
@@ -118,7 +118,7 @@ int intToString(int num, char *buffer) {
     return i;
 }
 
-void printf(char *fmt,...){     //funcion de print con funcionalidad similar a la brindada por stdio.h
+void printf(char *fmt,...){     //similar to printf in stdio.h
     va_list ap; 
     char *p, *sval;
     int ival;

@@ -72,8 +72,8 @@ SECTION .text
 %macro irqHandlerMaster 1
 	pushState
 
-	mov rdi, %1 ; pasaje de parametro
-	mov rsi, rsp ; puntero a principio de dump de registros
+	mov rdi, %1 ; passing parameter
+	mov rsi, rsp ; pointer to begining of regiters' dump 
 	call irqDispatcher
 
 	; signal pic EOI (End of Interrupt)
@@ -87,12 +87,13 @@ SECTION .text
 %macro exceptionHandler 1
 	pushState
 
-  	mov rsi, rsp
-	mov rdi, %1 ; pasaje de parametro
+  mov rsi, rsp
+	mov rdi, %1 ; passing parameter
 	call exceptionDispatcher
 
 	popState
 	iretq
+
 %endmacro
 
 
@@ -121,8 +122,8 @@ picMasterMask:
 picSlaveMask:
 	push    rbp
   mov     rbp, rsp
-  mov     ax, di  ; ax = mascara de 16 bits
-  out		0A1h, al
+  mov     ax, di  ; ax = 16 bits mask
+  out		  0A1h, al
   pop     rbp
   retn
 
@@ -143,14 +144,14 @@ _irq00Handler:
   je tickHandle
 
   switchTask:
-    mov rdi, rsp
-    mov rsi, ss
-    call next_task
-    mov rsp,rax
+  mov rdi, rsp
+  mov rsi, ss
+  call next_task
+  mov rsp,rax
 
   tickHandle:
-    mov rdi, 0
-    call irqDispatcher
+  mov rdi, 0
+  call irqDispatcher
 
   mov al, 20h
   out 20h, al
@@ -187,7 +188,7 @@ _irq80Handler:
   mov rax, 0         ; xor rax, rax
   mov rax, ss
   push rax
-  mov rax, [rsp + 8 * 16]        ; restauro rax
+  mov rax, [rsp + 8 * 16]        ; restore rax
 
   push r9
   mov r9, r8
@@ -200,7 +201,7 @@ _irq80Handler:
   call irq80Dispatcher
   pop r8
 
-  mov [rsp + 8 * 16], rax  ; valor de retorno
+  mov [rsp + 8 * 16], rax  ; retorn value
 
   pop r8
   pop r8

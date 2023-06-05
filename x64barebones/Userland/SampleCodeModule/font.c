@@ -11,7 +11,7 @@ int strToNum(char *str){
   while (('-' == (*str)) || ((*str) == '+'))
   {
       if (*str == '-')
-        sign = sign * -1; // cambiamos el signo si es negativo
+        sign = sign * -1; //  Changes sign if it is -
       str++;
   }
   while ((*str >= '0') && (*str <= '9'))

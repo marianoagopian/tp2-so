@@ -749,39 +749,33 @@ void read(char *filename)
 }
 
 
-void write(char *filename)
-{
+void write(char *filename){
+
 	struct BMFSEntry tempentry;
 	FILE *tfile;
 	int tint, slot;
 	unsigned long long tempfilesize;
 
-	if (0 == findfile(filename, &tempentry, &slot))
-	{
+	if (0 == findfile(filename, &tempentry, &slot)){
 		printf("Error: File not found in BMFS. A file entry must first be created.\n");
 	}
-	else
-	{
+	else{
+
 		printf("Writing local file '%s' to BMFS... ", filename);
-		if ((tfile = fopen(filename, "rb")) == NULL)
-		{
+		if ((tfile = fopen(filename, "rb")) == NULL){
 			printf("Error: Could not open local file '%s'\n", tempentry.FileName);
 		}
-		else
-		{
+		else{
 			// Is there enough room in BMFS?
 			fseek(tfile, 0, SEEK_END);
 			tempfilesize = ftell(tfile);
 			rewind(tfile);
-			if ((tempentry.ReservedBlocks*2097152) < tempfilesize)
-			{
+			if ((tempentry.ReservedBlocks*2097152) < tempfilesize){
 				printf("Not enough reserved space in BMFS.\n");
 			}
-			else
-			{
+			else{
 				fseek(disk, tempentry.StartingBlock*2097152, SEEK_SET); // Skip to the starting block in the disk
-				for (tint=0; tint<tempfilesize; tint++)
-				{
+				for (tint=0; tint<tempfilesize; tint++){
 					putc(getc(tfile), disk);			// This is really terrible.
 					// TODO: Rework with fread and fwrite (ideally with a 2MiB buffer)
 				}

@@ -4,7 +4,7 @@
 
 #define MAX_SEMAPHORES 50
 #define MAX_WAITING_PROCESS 20
-
+#define INITIAL_ID 10 //cant start with cero
 
 // we will also apply round robin in this case 
 // in order to avoid process being continually blocked
@@ -36,7 +36,7 @@ int find_available_sem_id(){
 		return ERROR_NO_MORE_SPACE;
 
 	uint8_t found = 0;
-	int sem_id = 10;  //podria ser que tiene que ser 10
+	int sem_id = INITIAL_ID;  
 
 	while(!found){
 		found = 1;

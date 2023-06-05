@@ -2,7 +2,6 @@
 #define _MEM_MANAGER_H_
 
 #include <stdint.h>
-#include <stdlib.h>
 #include <mm_utils.h>
 
 #define SUM_PTR(ptr, num) ((uint64_t) (ptr) + (num))

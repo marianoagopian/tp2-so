@@ -7,8 +7,6 @@
 
 #define REGISTERS 15
 
-#define NULL 0
-
 #define SYS_READ 0
 #define SYS_WRITE 1
 #define SYS_INFOREG 2

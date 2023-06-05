@@ -2,6 +2,9 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "../include/queue.h"
 
+#define NULL 0
+
+
 void init_queue(queueADT * q, unsigned int size){
     if(size == 0)
         return;

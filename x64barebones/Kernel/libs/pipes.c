@@ -4,15 +4,12 @@
 
 #define MAX_PIPES 20
 #define PIPE_SIZE 1024
+#define NULL 0
+#define INITIAL_PIPE 10 
 
+/* A clear example of producers and consumers. The write semaphore tracks how many free spaces 
+there are in the buffer and the read semaphore tracks how many filled spaces there are. */
 
-/* 
-	A clear example of producers and consumers.
-   	The write semaphore tracks how many free
-   	spaces there are in the buffer and the
-   	read semaphore tracks how many filled spaces
-   	there are.
-*/
 
 typedef struct pipe_record{
 	unsigned int pipe_id;
@@ -45,7 +42,7 @@ int find_available_pipe_id(){
 		return ERROR_NO_MORE_SPACE;
 
 	uint8_t found = false;
-	int pipe_id = 10; //capaz es 10
+	int pipe_id = INITIAL_PIPE; 
 
 	while(!found){
 		found = true;
@@ -157,7 +154,7 @@ int write_to_pipe(unsigned int pipe_id, const char * src, unsigned int count){
 	if(pos == INVALID_PIPE_ID)
 		return INVALID_PIPE_ID;
 			
-	for(int i=0; i<count; i++){
+	for(int i = 0; i < count; i++){
 		wait_sem(pipe_info[pos].write_sem_id);
 
 		pipe_info[pos].pipe[pipe_info[pos].write_pos] = src[i];
@@ -179,8 +176,8 @@ int read_from_pipe(unsigned int pipe_id, char * dest, unsigned int count){
 	if(pipe_info[pos].eof && pipe_info[pos].amount == 0){
 		return EOF;
 	}
-	int i=0;	
-	for(; i<count && !(pipe_info[pos].eof && pipe_info[pos].amount == 0); i++){
+	int i = 0;	
+	for(; i < count && !(pipe_info[pos].eof && pipe_info[pos].amount == 0); i++){
 		wait_sem(pipe_info[pos].read_sem_id);
 
 		dest[i] = pipe_info[pos].pipe[pipe_info[pos].read_pos];

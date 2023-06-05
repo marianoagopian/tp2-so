@@ -10,7 +10,7 @@ syscaller:
     push rbp
     mov rbp, rsp
 
-    mov rax, rdi        ; no hace falta preservar registros
+    mov rax, rdi        ; no need to preserve registers
     mov rdi, rsi
     mov rsi, rdx
     mov rdx, rcx

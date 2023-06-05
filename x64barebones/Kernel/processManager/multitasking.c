@@ -3,34 +3,35 @@
 #include "../include/multitasking.h"
 #include <syscalls.h>
 
-// ---- Constantes ----
 #define TOTAL_TASKS 20
 #define STACK_SIZE 4096
 
 #define MAX_PRIORITY 5
 
-// ---- Valores default para el armado del stack ----
+#define NULL 0
+
+//  Default values for stack
 #define FLAG_VALUES 0x202
-#define SS_VALUE 0x0				// en nuestro caso se mantiene constante
+#define SS_VALUE 0x0				// it is constant in this project
 #define CS_VALUE 0x8
 
-// ------Posiciones para el armado de stack para cada proceso------
-										/*		 -=-=STACK=-=-		*/
-#define STACK_POINT_OF_ENTRY (21*8)   	/*  	|	RAX, RBX  |		*/
-										/*  	|	RCX, etc  |		*/   
-#define RDI_POS   (13*8)				/*		---------------		*/ 
-#define IP_POS    (6*8)					/*  	|	 RIP	  |		*/				
-#define CS_POS 	  (5*8)					/*  	|	  CS	  |		*/
-#define FLAGS_POS (4*8)					/*  	|	 RFLAGS	  |		*/
-#define SP_POS 	  (3*8)					/*  	|	 RSP	  |		*/
-#define SS_POS	  (2*8)					/*  	|	  SS	  |		*/
-#define RET_POS 	8 					/*  	|	 RET	  |		*/
-#define ALINGMENT 8		 				/*   	 -------------		*/
+// Stack inicial positions for each process 
+										
+#define STACK_POINT_OF_ENTRY (21*8)   	
+										
+#define RDI_POS   (13*8)				
+#define IP_POS    (6*8)					
+#define CS_POS 	  (5*8)					
+#define FLAGS_POS (4*8)					
+#define SP_POS 	  (3*8)					
+#define SS_POS	  (2*8)					
+#define RET_POS 	8 					
+#define ALINGMENT   8		 			
 
 #define STACK_POS(POS) (uint64_t *) (stackStart - (POS))
 
 
-// -----Informacion sobre cada task-----
+// Each task info
 typedef struct process_control_block{
 		unsigned int pid;				// unique identifier. value is > 0
 
@@ -53,10 +54,10 @@ typedef struct process_control_block{
 // ------ Queue de tasks -------
 static process_control_block tasks[TOTAL_TASKS];
 
-static unsigned int newPidValue = 1;					// identificador para cada proceso
+static unsigned int newPidValue = 1;					// id
 	
-static unsigned int currentTask = 0;				// posicion en el array
-static unsigned int currentRemainingTicks = 0;			// How many timer ticks are remaining for the current process.
+static unsigned int currentTask = 0;				// array position
+static unsigned int currentRemainingTicks = 0;		// How many timer ticks are remaining for the current process.
 static unsigned int currentDimTasks = 0;
 
 static unsigned int idleTaskPid = 1;
@@ -105,13 +106,13 @@ uint8_t get_state(unsigned int pid){
 	return tasks[pos].state;
 }
 
-// Encuentro el task usando el pid
+
 int findTask(unsigned int pid){
 	for(int i=0; i<TOTAL_TASKS; i++){
 		if(tasks[i].pid == pid && tasks[i].state != DEAD_PROCESS)
 			return i;
 	}	
-	return NO_TASK_FOUND;			// no existe task con ese pid
+	return NO_TASK_FOUND;			
 }
 
 
@@ -285,13 +286,13 @@ void kill_screen_processes(){
 // pauso o despauso proceso con el pid
 int pauseOrUnpauseProcess(unsigned int pid){
 	int pos = findTask(pid);
-	if(pos < 0)					// se quiere pausar task que no existe
+	if(pos < 0)					// trying to pass unexistent process
 		return NO_TASK_FOUND;
 
 	if(tasks[pos].immortal)
 		return TASK_NOT_ALTERED;
 
-	tasks[pos].state = tasks[pos].state==PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// pausado -> despausado  | despausado -> pausado
+	tasks[pos].state = tasks[pos].state==PAUSED_PROCESS ? ACTIVE_PROCESS : PAUSED_PROCESS; 	// paused -> unpaused  and viceversa
 
 
 	if(pos == currentTask){
@@ -303,7 +304,7 @@ int pauseOrUnpauseProcess(unsigned int pid){
 
 int removeTask(unsigned int pid) {
 	int pos = findTask(pid);
-	if(pos < 0)					// se quiere remover task que no existe
+	if(pos < 0)					
 		return NO_TASK_FOUND;
 
 	if(tasks[pos].immortal)
@@ -338,7 +339,7 @@ unsigned int change_priority(unsigned int pid, int delta) {
 
 /* --- Scheduling --- */
 
-// se fija si le queda tiempo, si le queda, decrementa esa cantidad y
+// Checks if there is time left, if it does, it decrements that qty
 uint8_t has_or_decrease_time(){
 	if(currentRemainingTicks < tasks[currentTask].priority - 1){
 		tasks[currentTask].ticks++;
@@ -349,18 +350,18 @@ uint8_t has_or_decrease_time(){
 
 }
 /*	
-	Pasa al proximo task que se tiene que ejecutar. 
-	Parametros:  stackPointer: puntero al stack del task anterior  |  stackSegment: valor del stack segment del task anterior  
+	Passes next task about to execute
+	Parameters:  stackPointer: ptr to previous task stack   |  stackSegment: stack valye of previous task 
 */
 
 uint64_t next_task(uint64_t stackPointer, uint64_t stackSegment){
 
-	tasks[currentTask].stackPointer = stackPointer;			// updateo el current
+	tasks[currentTask].stackPointer = stackPointer;			// update  current
 	tasks[currentTask].stackSegment = stackSegment;
 	
 	char found=0;
 	unsigned int counter = 0;
-	while( !found && counter < currentDimTasks ){			// busco el proximo stack
+	while( !found && counter < currentDimTasks ){			// find next stack
 		
 		currentTask = (currentTask +  1) % TOTAL_TASKS;
 

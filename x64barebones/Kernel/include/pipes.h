@@ -5,7 +5,6 @@
 #include <memoryManager.h>
 #include <stdint.h>
 #include <lib.h>
-#include <stdbool.h>
 #include "./data_types.h"
 
 #define INVALID_PIPE_ID -1
@@ -21,6 +20,5 @@ void destroy_pipe(unsigned int pipe_id);
 
 int read_from_pipe(unsigned int pipe_id, char * dest, unsigned int count);
 int write_to_pipe(unsigned int pipe_id, const char * src, unsigned int count);
-
 
 #endif

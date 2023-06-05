@@ -5,7 +5,7 @@
 
 void time(){
     int aux = sys_time();
-    if(aux < 3600 * 3) {   // hay que restarle 3 ya que Buenos Aires es UTC-3 y sys_time devuelve en UTC
+    if(aux < 3600 * 3) {   //- 3 because BsAs is UTC-3 and sys_time works with UTC
         aux += 3600 * 21;
     } else {
         aux -= 3600 * 3;

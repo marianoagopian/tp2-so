@@ -1,7 +1,7 @@
 #ifdef USE_BUDDY
 
-#include "./include/memoryManager.h"
-#include "./include/mm_buddy.h"
+#include "../include/memoryManager.h"
+#include "../include/mm_buddy.h"
 
 static TNode * btree = (TNode *) SUM_PTR(HEAP_START, sizeof(memStatus));
 static void * userStart;
@@ -39,10 +39,8 @@ static unsigned int getSizeClass(uint64_t size) {
     return out < MIN_SIZE_CLASS? MIN_SIZE_CLASS : out;
 }
 
-// TODO: chequear que el size del btree sea menor que el size del heap
 void mm_init() {
     maxSizeClass = getSizeClass(HEAP_SIZE);
-
     int nodes = POW_2((maxSizeClass - MIN_SIZE_CLASS) + 1) - 1; // 2^h+1 - 1
 
     userStart = (void *) SUM_PTR(btree, nodes * sizeof(TNode));
@@ -109,7 +107,6 @@ void * mm_malloc(uint64_t size) {
         return NULL;
 
     memStatus * status = getMemStatus();
-    
     status->allocatedBytes += POW_2(sizeClass);
     status->freeBytes -= POW_2(sizeClass);
     status->allocatedBlocks++;

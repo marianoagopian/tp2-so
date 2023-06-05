@@ -1,7 +1,6 @@
 #include "./include/commands.h"
 #include "./include/syscalls.h"
 #include "./include/functions.h"
-#include <stdlib.h>
 
 #define ACTIVE_PROCESS 1
 #define PAUSED_PROCESS 2
@@ -14,7 +13,7 @@
 
 void ps(){
 
-	process_info * info = (void *)sys_alloc(20 * sizeof(process_info)); //need a cast
+	process_info * info = (void *)sys_alloc(20 * sizeof(process_info)); 
 
 	if(info == NULL) {
 		printf("No more space\n");
@@ -48,7 +47,7 @@ void ps(){
         printf("Background\n");
         break;
       case STDOUT:
-        printf("Stdout\n");
+        printf("STDOUT\n");
         break;
       default:
         printf("Pipe\n");
@@ -96,13 +95,11 @@ void block(char ** args){
     printf("Invalid argument! Argument must be number.\n");
     return;
   }
-  //check because the only blocked process is shell so cant test
   uint64_t pid = aToI(args[1]);
   sys_pause_process((unsigned int)pid);
   return;
 }
 
-//check eof result == sys_read has unsigned int result
 void cat(){
   int c;
   while ((c = getChar()) != EOF) { // Read input until there's no more input

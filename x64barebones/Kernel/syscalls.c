@@ -79,7 +79,7 @@ int sysTime() {
 
 
 unsigned int sysPrintmem(uint64_t position, char * buffer) {
-	if( !(position >= MIN_MEM_POS && position < MAX_MEM_POS) )		// restringimos tmb que no pueda leer memoria de kernel
+	if( !(position >= MIN_MEM_POS && position < MAX_MEM_POS) )		// restricted so as to avoid reading in kernel 
 		return INVALID_POS;
 
 	uint64_t current;

@@ -28,7 +28,7 @@ const char* helpString =
   "test-mm              Tests memory manager\n"
   "test-process         Given a number test scheduling based on that amount of programs\n"
   "test-prio            Tests pipes and semaphores\n"
-  "test-sync            Tests pipes and semaphores\n";
+  "test-sync            Tests pipes and semaphores. Try with 1 (for semaphores) or 0 (without semaphores) as parameter\n";
 
 
 void help() {
