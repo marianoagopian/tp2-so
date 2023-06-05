@@ -36,7 +36,7 @@ int find_available_sem_id(){
 		return ERROR_NO_MORE_SPACE;
 
 	uint8_t found = 0;
-	int sem_id = 0;  //podria ser que tiene que ser 10
+	int sem_id = 10;  //podria ser que tiene que ser 10
 
 	while(!found){
 		found = 1;

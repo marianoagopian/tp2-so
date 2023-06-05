@@ -53,7 +53,7 @@ void phylo() {
 
     char buf[1];
     while(!end){
-        sys_read(1, buf, 1);
+        sys_read(STDIN, buf, 1);
         switch(buf[0]){
             case 'a':
                 addPhylo();
@@ -102,7 +102,6 @@ void addPhylo(){
             printf("error creating philosopher. aborting\n");
             return;
         }
-
 
         currentCount++;
     }

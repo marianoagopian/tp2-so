@@ -45,7 +45,7 @@ int find_available_pipe_id(){
 		return ERROR_NO_MORE_SPACE;
 
 	uint8_t found = false;
-	int pipe_id = 0; //capaz es 10
+	int pipe_id = 10; //capaz es 10
 
 	while(!found){
 		found = true;
@@ -156,8 +156,7 @@ int write_to_pipe(unsigned int pipe_id, const char * src, unsigned int count){
 	int pos = find_pipe(pipe_id);
 	if(pos == INVALID_PIPE_ID)
 		return INVALID_PIPE_ID;
-	
-  printChar('A');
+			
 	for(int i=0; i<count; i++){
 		wait_sem(pipe_info[pos].write_sem_id);
 

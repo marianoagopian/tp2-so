@@ -74,7 +74,7 @@ void idleTask(){
 
 void enableMultiTasking(){
 
-	idleTaskPid = add_task((uint64_t)&idleTask, STDIN, BACKGROUND, DEFAULT_PRIORITY, IMMORTAL,idleArg);
+	idleTaskPid = add_task((uint64_t)&idleTask, STDIN, BACKGROUND, DEFAULT_PRIORITY, IMMORTAL, idleArg);
 	
 	alter_process_state(idleTaskPid, PAUSED_PROCESS);		// we pause the idle task until its actually needed (that being when all other tasks are paused)
 

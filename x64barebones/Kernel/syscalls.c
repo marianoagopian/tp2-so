@@ -239,10 +239,8 @@ uint64_t sysWrite(unsigned int fd, const char * buf,unsigned int count) {
       }
       break;
     default:
-      printChar('A');
       return write_to_pipe(fd, buf, count);
     }
-
 	return count;
 }
 
