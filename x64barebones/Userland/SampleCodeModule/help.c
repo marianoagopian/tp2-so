@@ -21,6 +21,8 @@ const char* helpString =
 	"kill                 Given a pid a process is ended\n"
 	"time                 Prints the current time\n"
 	"tron                 Executes the game tron light cycle\n"
+  "phylo                Runs the philosofers program\n"
+  "                     With 'a' you add a phylo, with 'r' you remove a phylo and with 'q' you quit the program\n"
   "test-mm              Tests memory manager\n"
   "test-process         Given a number test scheduling based on that amount of programs\n"
   "test-prio            Tests pipes and semaphores\n";
