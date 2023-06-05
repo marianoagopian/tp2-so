@@ -60,7 +60,6 @@ void remove_children(unsigned int fatherPid){
 void add_child(unsigned int fatherPid, unsigned int childPid){
 	for(int i=0 ; i<MAX_WAIT_TASKS; i++){
 		if(wait_table[i].state == NOT_TRACKING){
-
 			wait_table[i].fatherPid = fatherPid;
 			wait_table[i].childPid = childPid;
 			wait_table[i].state = RUNNING;

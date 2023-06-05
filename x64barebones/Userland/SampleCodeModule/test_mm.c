@@ -10,7 +10,7 @@ typedef struct MM_rq {
   uint32_t size;
 } mm_rq;
 
-uint64_t test_mm(uint64_t argc, char *argv[]) {
+void test_mm() {
 
   printf("test_mm: Starting...\n");
 
@@ -34,7 +34,7 @@ uint64_t test_mm(uint64_t argc, char *argv[]) {
 
       if(mm_rqs[rq].address == 0) {
         printf("test_mm: Out of memory\n");
-        return -1;
+        return;
       }
 
       if (mm_rqs[rq].address) {
@@ -54,7 +54,7 @@ uint64_t test_mm(uint64_t argc, char *argv[]) {
       if (mm_rqs[i].address)
         if (!memcheck(mm_rqs[i].address, i, mm_rqs[i].size)) {
           printf("test_mm ERROR\n");
-          return -1;
+          return;
         }
 
     // Free

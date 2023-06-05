@@ -5,6 +5,7 @@
 #include <color.h>
 #include "data_types.h"
 
+#define BACKGROUND 0
 #define STDIN 1
 #define STDOUT 1
 #define STDERR 2

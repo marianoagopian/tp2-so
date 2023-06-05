@@ -2,7 +2,6 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "../include/multitasking.h"
 #include <syscalls.h>
-#include <stdio.h>
 
 // ---- Constantes ----
 #define TOTAL_TASKS 20

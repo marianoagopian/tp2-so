@@ -48,7 +48,7 @@ static programInfo programs[] = {
   {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
   {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},
   {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 1, .pipe = 0},
-  {.name = "test-sync", .ptrToFunction = (uint64_t) &test_sync, .args = 0, .pipe = 0}
+  {.name = "test-sync", .ptrToFunction = (uint64_t) &test_sync, .args = 1, .pipe = 0}
 };
 
 

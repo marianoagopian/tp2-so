@@ -15,24 +15,7 @@ static void zeroDivision(uint64_t * registerDumpPos);
 static void invalidOpCode(uint64_t * registerDumpPos);
 static void handlerException();
 
-char* intToString(int num, char *buffer) {
-    if(num==0) {
-        buffer[0] = '0';
-        buffer[1] = 0;
-        return buffer;
-    }
-    int i = 0;
-    while(num > 0) {
-        buffer[i++] = num % 10 + '0';
-        num /= 10;
-    }
-    reverseString(buffer, i);
-    buffer[i] = 0;
-    return buffer;
-}
-
 void exceptionDispatcher(int exception, uint64_t * registerDumpPos) {
-  char asds[20] = {0};
   switch (exception) {
     case ZERO_EXCEPTION_ID:
       zeroDivision(registerDumpPos);
@@ -41,11 +24,7 @@ void exceptionDispatcher(int exception, uint64_t * registerDumpPos) {
     case INVALID_OPERATION_CODE_ID:
       invalidOpCode(registerDumpPos);
       break;
-    
-    default:
-      sysWrite(STDOUT, intToString(exception, asds), 1);
-    }
-
+  }
 }
 
 static void zeroDivision(uint64_t * registerDumpPos) {
