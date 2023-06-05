@@ -33,6 +33,8 @@ void cat();
 
 void wc();
 
+void filter();
+
 void divByZero();
 
 void help();

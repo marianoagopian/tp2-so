@@ -111,12 +111,20 @@ void cat(){
 
 void wc(){
   int c, counter = 1;
-  while ((c = getChar()) != EOF)
-  {
+  while ((c = getChar()) != EOF){
     if (c == '\n')
       counter++;
   }
-  printf("La cantidad de lineas escritas fueron: %d", counter);
+  printf("Total written lines: %d", counter);
   return;
 
+}
+
+void filter(){
+  int c;
+  while ((c = getChar()) != EOF){
+    if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u'){
+      putchar(c);
+    }
+  }
 }
