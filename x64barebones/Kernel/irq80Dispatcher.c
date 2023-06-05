@@ -7,7 +7,7 @@
 
 
 uint64_t irq80Dispatcher(uint64_t mode, uint64_t arg0, uint64_t arg1, 
-	uint64_t arg2, uint64_t arg3, uint64_t arg4, uint64_t arg5, uint64_t ss, uint64_t rsp) {
+	uint64_t arg2, uint64_t arg3, uint64_t ss, uint64_t rsp) {
 	switch (mode) {
 		case SYS_READ:
 			return sysRead((unsigned int) arg0, (char *) arg1, (unsigned int) arg2);

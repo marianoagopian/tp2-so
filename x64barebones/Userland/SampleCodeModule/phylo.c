@@ -51,10 +51,10 @@ void phylo() {
         addPhylo();
     }
 
-    char buf[1];
+    char buf = 0;
     while(!end){
-        sys_read(STDIN, buf, 1);
-        switch(buf[0]){
+        sys_read(STDIN, &buf, 1);
+        switch(buf){
             case 'a':
                 addPhylo();
                 break;

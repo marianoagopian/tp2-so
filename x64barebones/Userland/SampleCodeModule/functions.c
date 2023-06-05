@@ -1,3 +1,5 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "./include/syscalls.h"
 #include <color.h>
 #include "./include/functions.h"
@@ -29,7 +31,7 @@ void clearScreen() {
 }
 
 char getChar() {
-	char c;
+	char c = 0;
 
   while (sys_read(STDIN, &c, 1) == 0){
       ;

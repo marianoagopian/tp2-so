@@ -13,7 +13,7 @@ uint64_t sys_write(const char * string, uint64_t length){
 }   
 
 uint8_t sys_info_reg(uint64_t reg[15]){
-    return syscaller(SYS_INFOREG, reg[15], NULL, NULL, NULL ); 
+    return syscaller(SYS_INFOREG, (uint64_t)reg, NULL, NULL, NULL ); 
 }
 
 uint64_t sys_time(){
