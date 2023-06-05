@@ -151,31 +151,8 @@ void single_process_handle(char ** words, unsigned int amount_of_words){
         return;
     }
 
-
-    // Check if user wants to run program in background
-    int i, backgroud = 0;
-    for(i=programs[program_pos].args + 1; !backgroud && i<amount_of_words; i++){
-        if(strcmp("//", words[i]) == 0){         // We consider the symbol as the last argument. All subsequent arguments will be ignored
-            backgroud = 2;       
-        }
-        else if(strcmp("/", words[i]) == 0){         // We consider the symbol as the last argument. All subsequent arguments will be ignored
-            backgroud = 1;       
-        }
-    }
-
-    // Run in background
-    if(backgroud == 2){
-        sys_register_process(programs[program_pos].ptrToFunction, STDIN, BACKGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); 
-    }
-    else if(backgroud == 1){
-        sys_register_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND, (uint64_t) make_params(words, MIN(i-1,programs[program_pos].args))); 
-    }
-
-    // Run on screen
-    else{
-        sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND,  (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
-        sys_wait_for_children();
-    }
+    sys_register_child_process(programs[program_pos].ptrToFunction, STDIN, FOREGROUND,  (uint64_t) make_params(words, MIN(amount_of_words-1, programs[program_pos].args))); 
+    sys_wait_for_children();
     
 }
 

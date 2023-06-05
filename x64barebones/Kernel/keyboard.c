@@ -43,8 +43,7 @@ void keyboard_handler(uint64_t * regDumpPos) {
     ctrl = 0;
     return;
   } else if(ctrl && scanCodeTable[c] == 'd') {
-    //keyBuffer[writePos++] = -1; //EOF
-    sysWritePipe(STDIN,EOF,2);
+    keyBuffer[writePos++] = -1; //EOF
     ctrl = 0;
     return;
   } else {
@@ -57,13 +56,19 @@ void keyboard_handler(uint64_t * regDumpPos) {
 }
 
 
-unsigned int readKeyboardCharacters(char* buf, unsigned int n) {
+unsigned int readKeyboardCharacters(char * buf, unsigned int n) {
   _cli();
   unsigned int charsRead = 0;
   unsigned int scancodeIndex;
   for (scancodeIndex = 0; scancodeIndex < writePos && charsRead < n; scancodeIndex++) {
+    if (keyBuffer[scancodeIndex] == -1) {
+      buf[charsRead++] = keyBuffer[scancodeIndex];
+      printNewline();
+    }
+
     unsigned char c = keyBuffer[scancodeIndex];
-    if ( c > 0 && c < 128){
+
+    if (c > 0 && c < 128){
       buf[charsRead++] = scanCodeTable[c];
     } 
   }
