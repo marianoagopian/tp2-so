@@ -10,8 +10,8 @@ uint64_t sys_read(uint64_t fd, const char * buf, unsigned int length){
     return syscaller(SYS_READ, (uint64_t) fd, (uint64_t) buf, (uint64_t) length, NULL );      
 }
 
-uint64_t sys_write(uint64_t fd, const char * string, uint64_t length){
-    return syscaller(SYS_WRITE, (uint64_t) fd, (uint64_t) string, length, NULL );      
+uint64_t sys_write(const char * string, uint64_t length){
+    return syscaller(SYS_WRITE, (uint64_t) string, length, NULL, NULL);      
 }   
 
 uint8_t sys_info_reg(uint64_t reg[15]){
@@ -111,15 +111,15 @@ uint64_t sys_read_pipe(unsigned int pipe_id, char * dest, unsigned int count){
 }
 
 uint64_t sys_register_child_process(uint64_t entryPoint, uint8_t input, uint8_t output, uint64_t arg0){
-    return syscaller(SYS_REGISTER_CHILD_PROCESS, (uint64_t) entryPoint, (uint64_t) input, (uint64_t) output, arg0);      
+    return syscaller(SYS_REGISTER_CHILD_PROCESS, (uint64_t) entryPoint, (uint64_t) input, (uint64_t) output, arg0);
 }
 
 uint64_t sys_register_pipe_available(){
-    return syscaller(SYS_REGISTER_PIPE_AVAILABLE, NULL, NULL, NULL , NULL );    
+    return syscaller(SYS_REGISTER_PIPE_AVAILABLE, NULL, NULL, NULL , NULL );
 }
 
 uint64_t sys_register_process(uint64_t entrypoint, uint8_t input, uint8_t output, uint64_t arg0){
-    return syscaller(SYS_REGISTER_PROCESS, (uint64_t) entrypoint, (uint64_t) input, (uint64_t) output, arg0);      
+    return syscaller(SYS_REGISTER_PROCESS, (uint64_t) entrypoint, (uint64_t) input, (uint64_t) output, arg0);
 }
 
 uint64_t  sys_register_sem(unsigned int sem_id, unsigned int value){

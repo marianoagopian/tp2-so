@@ -7,11 +7,11 @@
 #include <multitasking.h>
 
 static const char scanCodeTable[256] = {
-    0,  ESCAPE,  '1',  '2',  '3',  '4',  '5',  '6',   '7',  '8',  '9',   '0',   '-',  '=',    '\b',
+    0,  ESCAPE,  '1',  '2',  '3',  '4',  '5',  '6',   '7',  '8',  '9',   '0',   '-',  '=', '\b',
     '\t', 'q',  'w',  'e',  'r',  't',  'y',  'u',  'i',   'o',  'p',  '[',   ']',  '\n',
-    0,     'a',  's', 'd',  'f',  'g',  'h',  'j',  'k',  'l', ';' ,  '\'',
+    0,     'a',  's', 'd',  'f',  'g',  'h',  'j',  'k',  'l', ';' ,  '|',
     0,    0,  0,   'z',  'x',  'c', 'v', 'b',  'n',  'm',  ',',  '.',  '/',    0,
-    '*',     CTRL,  ' ',    0,     0,     0,    0,       0,         0,
+    '*',     0,  ' ',    0,     0,     0,    0,       0,         0,
 };
 
 /*-------- CONSTANTS --------*/
@@ -74,11 +74,4 @@ void cleanKeyboardBuffer() {
   } 
   writePos = 0;
   index = 0;
-}
-
-char checkKeyboardBuffer() {
-  if(index < writePos) {
-    return keyBuffer[index++];
-  }
-  return keyBuffer[index];
 }

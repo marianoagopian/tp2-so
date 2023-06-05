@@ -14,7 +14,7 @@ uint64_t irq80Dispatcher(uint64_t mode, uint64_t arg0, uint64_t arg1,
 		case SYS_READ:
 			return sysRead((unsigned int) arg0, (char *) arg1, (unsigned int) arg2);
 		case SYS_WRITE:
-			return sysWrite((unsigned int) arg0,(const char *) arg1, (unsigned int) arg2);
+			return sysWriteToScreen((const char *) arg0, (unsigned int) arg1);
 		case SYS_INFOREG:
 			return sysInfoReg((uint64_t *)arg0);
 		case SYS_TIME:
@@ -27,8 +27,6 @@ uint64_t irq80Dispatcher(uint64_t mode, uint64_t arg0, uint64_t arg1,
             return 0;
 		case SYS_PRINT_MEM:
 			return sysPrintmem(arg0,(char*) arg1);
-		case SYS_CHECK_BUFFER:
-			return sysCheckBuffer();
 		case SYS_HOLDER:
 			sysHolder((int)arg0);
 			return 0;

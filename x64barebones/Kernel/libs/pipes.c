@@ -157,6 +157,7 @@ int write_to_pipe(unsigned int pipe_id, const char * src, unsigned int count){
 	if(pos == INVALID_PIPE_ID)
 		return INVALID_PIPE_ID;
 	
+  printChar('A');
 	for(int i=0; i<count; i++){
 		wait_sem(pipe_info[pos].write_sem_id);
 

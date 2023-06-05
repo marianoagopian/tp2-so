@@ -7,6 +7,8 @@
 #define PAUSED_PROCESS 2
 #define NUM_LOOP 200000000 //0.2 sec
 #define EOF -1
+#define BACKGROUND 0
+#define FOREGROUND 1
 
 void ps(){
 
@@ -20,25 +22,36 @@ void ps(){
 	uint64_t amount =  sys_process_info(info);
 
 	for(int i = 0; i < amount; i++){
-    
-		printf("Name: %s\t\t|  ",info[i].name);
-        printf("PID: %d\t\t|  ",info[i].id);
-        printf("State: ");
+		printf("Name: %s\t| ",info[i].name);
+    printf("PID: %d\t| ",info[i].id);
+    printf("State: ");
 		// state
 		switch(info[i].state){
 			case ACTIVE_PROCESS: 
-				printf("Active\t\t|  ");
+				printf("Active\t| ");
 				break;
 			case PAUSED_PROCESS:
-				printf("Paused\t\t|  ");
+				printf("Paused\t| ");
 				break;
 			default:
-				printf("Blocked\t\t|  ");
+				printf("Blocked\t| ");
 				break;
 		}
-        printf("Priority: %d\t\t|  ",info[i].priority);
-        printf("Stack: %d\t\t|  ",info[i].stack);
-        printf("RSP: %d\n",info[i].rsp);
+    printf("Priority: %d\t| ",info[i].priority);
+    printf("Stack: %d\t| ",info[i].stack);
+    printf("RSP: %d\t| ",info[i].rsp);
+    printf("Screen: ");
+    switch(info[i].screen) {
+      case BACKGROUND:
+        printf("Background\n");
+        break;
+      case STDOUT:
+        printf("Stdout\n");
+        break;
+      default:
+        printf("Pipe\n");
+        break;
+    }
 	}
 
 	sys_free((void*)info);

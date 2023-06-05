@@ -17,7 +17,7 @@
 #define SYS_BEEP 5
 #define SYS_PRINT_MEM 6
 //#define SYS_DRAW_RECT 7
-#define SYS_CHECK_BUFFER 8
+#define SYS_CHECK_BUFFER 8 //TODO: SACAR
 #define SYS_HOLDER 9  
 #define SYS_CLEAR_BUFFER 10
 #define SYS_SET_LEVEL 11
@@ -56,7 +56,7 @@
 #define CHAR_HEIGHT 16
 
 uint64_t sys_read(uint64_t fd, const char* buf, unsigned int length);
-uint64_t sys_write(uint64_t fd, const char* buf, uint64_t count);
+uint64_t sys_write(const char* buf, uint64_t count);
 uint8_t sys_info_reg(uint64_t reg[15]);
 uint64_t sys_time();
 void sys_clear_screen();

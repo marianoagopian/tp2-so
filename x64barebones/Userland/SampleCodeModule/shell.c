@@ -6,7 +6,8 @@
 
 #define PARAMETERS_ERROR "Parameters are not needed for this command, try without them.\n"
 #define PIPE_ERROR "The program does not work with pipes, try without them.\n"
-#define MISSING_ARGS "The program needs arguments.\n"
+#define MISSING_MULTIPLE_PARAMS "The program needs %d parameters.\n"
+#define MISSING_SINGLE_PARAM "The program needs a parameter.\n"
 #define INVALID_PROGRAM "The program does not exist. Use the command help for help\n"
 #define MALLOC_ERROR "Error allocating space for args!"
 
@@ -22,7 +23,7 @@ typedef struct programInfo {
   uint8_t pipe;
 } programInfo;
 
-#define PROGRAMS_QTY 19
+#define PROGRAMS_QTY 20
 
 static programInfo programs[] = {
   {.name = "clear", .ptrToFunction = (uint64_t) &sys_clear_screen, .args = 0, .pipe = 0},
@@ -43,7 +44,8 @@ static programInfo programs[] = {
   {.name = "tron", .ptrToFunction = (uint64_t) &tron, .args = 0, .pipe = 0},
   {.name = "test-mm", .ptrToFunction = (uint64_t) &test_mm, .args = 0, .pipe = 0},
   {.name = "test-prio", .ptrToFunction = (uint64_t) &test_prio, .args = 0, .pipe = 0},
-  {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 1, .pipe = 0}
+  {.name = "test-process", .ptrToFunction = (uint64_t) &test_processes, .args = 1, .pipe = 0},
+  {.name = "test-sync", .ptrToFunction = (uint64_t) &test_sync, .args = 0, .pipe = 0}
 };
 
 
@@ -144,7 +146,7 @@ void single_process_handle(char ** words, unsigned int amount_of_words){
         return;
     }
     if(amount_of_words - 1 < programs[program_pos].args){
-        printf(MISSING_ARGS);
+        printf(programs[program_pos].args > 1 ? MISSING_MULTIPLE_PARAMS : MISSING_SINGLE_PARAM, programs[program_pos].args);
         return;
     }
 

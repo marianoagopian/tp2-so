@@ -34,11 +34,15 @@ void sysClear() {
 
 unsigned int sysRead(unsigned int fd, char * buf, unsigned int count){
 	unsigned int totalRead = 0;
+  if(fd == STDIN) {
     do {
         _hlt();
         totalRead = readKeyboardCharacters(buf + totalRead, count - totalRead);
     } while (totalRead == 0);
     return totalRead;
+  }
+
+  return read_from_pipe(fd, buf, count);
 }
 
 static int hasScreenshoted = 0;
@@ -91,11 +95,6 @@ unsigned int sysPrintmem(uint64_t position, char * buffer) {
 void sysClearBuffer() {
   cleanKeyboardBuffer();
 }
-
-char sysCheckBuffer() {
-  return checkKeyboardBuffer();
-}
-
 
 int sysGetLevel() {
   return getLevel();
@@ -224,27 +223,33 @@ uint64_t sysWaitSem(unsigned int sem_id){
 }
 
 uint64_t sysWrite(unsigned int fd, const char * buf,unsigned int count) {
-  if(fd != STDERR && fd != STDOUT) {
-    return 0;
-  }
-  if (fd == STDERR) {
-    setScreenPrintColor((Color){0x00, 0x00, 0xFF});
-  }
-	for (int i = 0; i < count; i++)
-		printChar(buf[i]);
-	setScreenPrintColor((Color){0x7F, 0x7F, 0x7F});
-	
+  switch(fd) {
+    case BACKGROUND:
+      break;
+    case STDERR:
+      setScreenPrintColor((Color){0x00, 0x00, 0xFF});
+      for (int i = 0; i < count; i++) {
+        printChar(buf[i]);
+      }
+      setScreenPrintColor((Color){0x7F, 0x7F, 0x7F});
+      break;
+    case STDOUT:
+      for (int i = 0; i < count; i++) {
+        printChar(buf[i]);
+      }
+      break;
+    default:
+      printChar('A');
+      return write_to_pipe(fd, buf, count);
+    }
+
 	return count;
 }
-/*
-uint64_t sysWrite(unsigned int fd, const char *buf, unsigned int count){
-	return writeDispatcher(fd, buf, count);
-}*/
 
 uint64_t sysWritePipe(unsigned int pipe_id, const char * src, unsigned int count){
 	return write_to_pipe(pipe_id, src, count);
 }
 
 uint64_t sysWriteToScreen(const char *buf, unsigned int count) {
-	return sysWrite(get_current_output(),buf,count);			
+	return sysWrite(get_current_output(),buf,count);	
 }

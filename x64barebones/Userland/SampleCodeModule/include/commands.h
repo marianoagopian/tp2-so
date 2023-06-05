@@ -55,5 +55,6 @@ void test_prio();
 
 int64_t test_processes(char *argv[]);
 
+uint64_t test_sync();
 
 #endif

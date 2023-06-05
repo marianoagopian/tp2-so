@@ -21,7 +21,7 @@ void putchar(char c) {
 }
 
 void print(const char* buf, uint64_t count) {
-    sys_write(STDOUT, buf, count);
+    sys_write(buf, count);
 }
 
 void clearScreen() {

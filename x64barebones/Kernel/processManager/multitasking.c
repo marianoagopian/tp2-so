@@ -81,23 +81,6 @@ void enableMultiTasking(){
 	forceCurrentTask();
 }
 
-
-char * intToString(int num, char *buffer) {
-    if(num==0) {
-        buffer[0] = '0';
-        buffer[1] = 0;
-        return buffer;
-    }
-    int i = 0;
-    while(num > 0) {
-        buffer[i++] = num % 10 + '0';
-        num /= 10;
-    }
-    reverseString(buffer, i);
-    buffer[i] = 0;
-    return buffer;
-}
-
 /* --- Getters --- */
 unsigned int get_current_pid(){
 	return tasks[currentTask].pid;
@@ -254,13 +237,13 @@ void forceChangeTask(){
 /* --- Process management --- */
 
 // alter state of all tasks that have a specific state
-// void alter_state_if(uint8_t old_state, uint8_t new_state){
-// 	for(int i=0; i<TOTAL_TASKS; i++){
-// 		if(tasks[i].state != DEAD_PROCESS && tasks[i].state == old_state){
-// 			tasks[i].state = new_state;
-// 		}
-// 	}
-// }
+void alter_state_if(uint8_t old_state, uint8_t new_state){
+	for(int i=0; i<TOTAL_TASKS; i++){
+		if(tasks[i].state != DEAD_PROCESS && tasks[i].state == old_state){
+			tasks[i].state = new_state;
+		}
+	}
+}
 
 // alter state of a specific task
 void alter_process_state(unsigned int pid, uint8_t new_state){
@@ -341,7 +324,6 @@ unsigned int change_priority(unsigned int pid, int delta) {
 	if(pos < 0)
 		return NO_TASK_FOUND;
 
-	char * buffer[20];
 	if(delta > MAX_PRIORITY)
 		tasks[pos].priority = MAX_PRIORITY;
 	else if(delta < 1)
