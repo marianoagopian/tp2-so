@@ -5,6 +5,8 @@
 #include "../include/memoryManager.h"
 #include "../include/mm_buddy.h"
 
+#define NULL 0
+
 static TNode * btree = (TNode *) SUM_PTR(HEAP_START, sizeof(memStatus));
 static void * userStart;
 static unsigned int maxSizeClass;
