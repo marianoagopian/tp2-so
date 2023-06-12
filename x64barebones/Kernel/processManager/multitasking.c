@@ -49,6 +49,8 @@ typedef struct process_control_block{
 		uint8_t output;
 
 		uint64_t ticks;					// the amount of times the scheduler picked it to run
+    int currentBlock;
+    void * allocated[20];
 }process_control_block;
 
 // ------ Queue de tasks -------
@@ -186,7 +188,13 @@ int add_task(uint64_t entrypoint, uint8_t input, uint8_t output, uint8_t priorit
 	tasks[pos].input = input;
 	tasks[pos].output = output;
 
+  tasks[pos].currentBlock = 0;
+
 	return tasks[pos].pid;
+}
+
+void add_mem(void *ptr) {
+  tasks[currentTask].allocated[tasks[currentTask].currentBlock++] = ptr;
 }
 
 // params are null terminated array of pointers to strings
@@ -203,6 +211,9 @@ void free_params(char ** params){
 
 void destroy_process(unsigned int pos){
 	signal_process_finished(tasks[pos].pid);
+  for(int i = 0 ; i < tasks[pos].currentBlock ; i++) {
+    mm_free(tasks[pos].allocated[i]);
+  }
 	free_params(tasks[pos].params);
 	tasks[pos].state = DEAD_PROCESS;
 	currentDimTasks--;

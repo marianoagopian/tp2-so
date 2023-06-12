@@ -130,7 +130,9 @@ void sysDrawGreenRect(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
 }
 
 uint64_t sysAlloc(uint64_t len) {
-	return (uint64_t) mm_malloc(len);
+  void * aux = mm_malloc(len);
+  add_mem(aux);
+	return (uint64_t) aux;
 }
 
 uint64_t sysNice(uint8_t pid, int delta){

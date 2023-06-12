@@ -17,6 +17,8 @@ void ps(){
 
 	process_info * info = (void *)sys_alloc(20 * sizeof(process_info)); 
 
+  sys_alloc(30);
+
 	if(info == NULL) {
 		printf("No more space\n");
 		return;

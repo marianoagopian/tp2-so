@@ -65,6 +65,7 @@ void alter_state_if(uint8_t old_state, uint8_t new_state);
 void pauseScreenProcess(unsigned int screen);
 int pauseOrUnpauseProcess(unsigned int pid);
 
+void add_mem(void *ptr);
 void kill_screen_processes();
 void removeCurrentTask();
 int removeTask(unsigned int pid);
